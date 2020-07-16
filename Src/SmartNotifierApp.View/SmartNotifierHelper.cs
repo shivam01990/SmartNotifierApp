@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConfigurationExample
+namespace SmartNotifier.View
 {
     public sealed class SmartNotifierHelper
     {
         private static SmartNotifierHelper instance = null;
         private static readonly object padlock = new object();
         private readonly NotificationServices _vm;
-        private int _count = 0;
 
         SmartNotifierHelper()
         {
@@ -33,7 +32,7 @@ namespace ConfigurationExample
             }
         }
 
-     
+
         public void ShowInformation(string message)
         {
             _vm.ShowInformation(message);

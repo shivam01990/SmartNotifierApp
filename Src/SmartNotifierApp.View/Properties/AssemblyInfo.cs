@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ConfigurationExample")]
+[assembly: AssemblyTitle("SmartNotifier.View")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ConfigurationExample")]
+[assembly: AssemblyProduct("SmartNotifier.View")]
 [assembly: AssemblyCopyright("Copyright © Rafał Łopatka 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

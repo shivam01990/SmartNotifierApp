@@ -1,4 +1,4 @@
-﻿namespace ConfigurationExample.Utilities
+﻿namespace SmartNotifier.View.Utilities
 {
     public enum PositionProviderType
     {

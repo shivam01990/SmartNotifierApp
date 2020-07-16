@@ -2,7 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Data;
 
-namespace ConfigurationExample.Utilities
+namespace SmartNotifier.View.Utilities
 {
     public class EnumBooleanConverter : IValueConverter
     {

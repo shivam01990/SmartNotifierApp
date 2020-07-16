@@ -1,4 +1,4 @@
-using ConfigurationExample.Utilities;
+using SmartNotifier.View.Utilities;
 using System;
 using System.ComponentModel;
 using System.Windows;
@@ -10,7 +10,7 @@ using ToastNotifications.Lifetime.Clear;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 
-namespace ConfigurationExample
+namespace SmartNotifier.View
 {
     public class NotificationServices : INotifyPropertyChanged
     {
