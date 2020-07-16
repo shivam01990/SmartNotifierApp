@@ -12,13 +12,13 @@ using ToastNotifications.Position;
 
 namespace ConfigurationExample
 {
-    public class NotificationHelper : INotifyPropertyChanged
+    public class NotificationServices : INotifyPropertyChanged
     {
         #region notifier configuration
 
         private Notifier _notifier;
 
-        public NotificationHelper()
+        public NotificationServices()
         {
             _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Screen, NotificationLifetimeType.Basic);
             Application.Current.MainWindow.Closing += MainWindowOnClosing;

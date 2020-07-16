@@ -63,8 +63,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SmartNotifierHelper.cs" />
     <Compile Include="Utilities\EnumBooleanConverter.cs" />
-    <Compile Include="NotificationHelper.cs" />
+    <Compile Include="NotificationServices.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
