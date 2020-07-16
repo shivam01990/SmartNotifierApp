@@ -15,7 +15,7 @@ namespace SmartNotifier.View.ViewModel
 
         public  string Icon
         {
-            get { return ""; }
+            get { return "/Files/Overview.png"; }
         }
     }
 }

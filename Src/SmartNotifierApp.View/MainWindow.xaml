@@ -6,7 +6,7 @@
         xmlns:Convertor="clr-namespace:SmartNotifier.View.Converters"
         xmlns:View="clr-namespace:SmartNotifier.View.View"
         Title="Smart Notifier App" Height="600" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
-        FontFamily="Georgia" Background="Transparent"  Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
+        FontFamily="Georgia" Background="Transparent"  MouseLeftButtonDown="Drag_Window"  Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CloseCommand_Executed"/>
         <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute_1" Executed="MiniMize_Execute" />
@@ -15,11 +15,11 @@
         <Grid.Resources>
             <Convertor:ImageToSourceConverter x:Key="ImageSourceConverter">
             </Convertor:ImageToSourceConverter>
-            
+
             <DataTemplate DataType="{x:Type ViewModel:OverviewViewModel}">
                 <View:OverView/>
             </DataTemplate>
-           
+
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -29,32 +29,21 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Expander Header="Menu" IsExpanded="True" Margin="25,10,25,388" Height="100" Width="150" >
-            <ListBox x:Name="ListBoxMenu"                    
+        <!--<Expander Header="Menu" IsExpanded="True"  Height="500" Width="150" >-->
+        <ListBox x:Name="ListBoxMenu"                    
                  Grid.Column="0"
                  ItemsSource="{Binding DelarsMenu}"
-                  RenderTransformOrigin="0.51,0.18" Height="100" Width="150" SelectionChanged="ListBoxMenu_SelectionChanged" Margin="0,0,-2,0" >
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="{Binding Icon,Converter={StaticResource ImageSourceConverter}}" Width="25" />
-                            <TextBlock Text="{Binding Name}" Padding="10"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </Expander>
-       
-
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Column="1" >
-                <Button Content="Test Message" Margin="5" Width="100" Click="Button_ShowInformationClick" />
-            </StackPanel>
-        </Grid>
+                  Width="199" SelectionChanged="ListBoxMenu_SelectionChanged"  >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Icon,Converter={StaticResource ImageSourceConverter}}" Width="25" />
+                        <TextBlock Text="{Binding Name}" Padding="10"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <!--</Expander>-->
         <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020"   BorderThickness="3,0,0,0">
             <ContentControl Name="pnlcontent" Width="550" Height="450" />
         </Border>

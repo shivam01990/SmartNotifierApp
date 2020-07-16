@@ -39,6 +39,7 @@ namespace SmartNotifier.View
             nIcon.ContextMenu = m_menu;
             WindowState = System.Windows.WindowState.Minimized;
             Hide();
+            ListBoxMenu.SelectedIndex = 0;
             //nIcon.ShowBalloonTip(3000, "", "Check for updates", ToolTipIcon.Info);
         }
 
@@ -53,13 +54,7 @@ namespace SmartNotifier.View
             WindowState = WindowState.Normal;
             Show();
             Activate();
-        }
-
-
-        private void Button_ShowInformationClick(object sender, RoutedEventArgs e)
-        {
-            SmartNotifierHelper.Instance.ShowInformation("Test message");
-        }
+        }      
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -105,6 +100,11 @@ namespace SmartNotifier.View
             {
                 pnlcontent.Content = ListBoxMenu.SelectedItem;
             }
+        }
+
+        public void Drag_Window(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
 }

@@ -18,7 +18,8 @@ namespace SmartNotifier.View.Converters
                 if (value is string)
                 {
                     string str = (string)value;
-                    return new BitmapImage(new Uri(str, UriKind.RelativeOrAbsolute));
+                    BitmapImage image = new BitmapImage(new Uri(AppDomain.CurrentDomain.BaseDirectory+str, UriKind.RelativeOrAbsolute));
+                    return image;
                 }
                 else if (value is Uri)
                 {

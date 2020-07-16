@@ -24,5 +24,9 @@ namespace SmartNotifier.View.View
         {
             InitializeComponent();
         }
+        private void Button_ShowInformationClick(object sender, RoutedEventArgs e)
+        {
+            SmartNotifierHelper.Instance.ShowInformation("Test message");
+        }
     }
 }
