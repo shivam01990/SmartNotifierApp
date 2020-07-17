@@ -97,5 +97,7 @@ namespace SmartNotifier.View
 
         public DateTime? LastRestartTime { get; set; } = null;
 
+        public TimeSpan LastRestartedTimeSpan { get; set; }
+
     }
 }

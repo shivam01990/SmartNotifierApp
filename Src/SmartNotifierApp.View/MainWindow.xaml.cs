@@ -57,7 +57,7 @@ namespace SmartNotifier.View
             }
             else
             {
-                SmartNotifierHelper.Instance.LastRestartTime = ((DateTime)SmartNotifierHelper.Instance.LastRestartTime).AddSeconds(1);
+                SmartNotifierHelper.Instance.LastRestartedTimeSpan = DateTime.Now - (DateTime)SmartNotifierHelper.Instance.LastRestartTime;
             }
         }
 
@@ -65,7 +65,7 @@ namespace SmartNotifier.View
         {
             while (true)
             {
-                if (SmartNotifierHelper.Instance.LastRestartTime != null)
+                if (SmartNotifierHelper.Instance.LastRestartTime != null && SmartNotifierHelper.Instance.LastRestartedTimeSpan.TotalHours > 2)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
