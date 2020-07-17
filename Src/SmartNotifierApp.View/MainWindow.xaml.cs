@@ -3,17 +3,22 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.ServiceModel;
+using System.Threading;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Threading;
 
 namespace SmartNotifier.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+
+    [CallbackBehavior(UseSynchronizationContext = false)]
+    public partial class MainWindow : Window//, NotifyServiceWCF.IService1Callback
     {
         [DllImport("user32.dll")]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
@@ -30,6 +35,50 @@ namespace SmartNotifier.View
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel();
+            AddNotifyTray();
+            ListBoxMenu.SelectedIndex = 0;
+            SmartNotifierHelper.Instance.InitializeServiceInstance();
+
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(1);
+            timer.Tick += timer_Tick;
+            timer.Start();
+
+            BackgroundWorker checkSystemTimer = new BackgroundWorker();
+            checkSystemTimer.DoWork += new DoWorkEventHandler(CheckLastRestart);
+            checkSystemTimer.RunWorkerAsync();
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (SmartNotifierHelper.Instance.LastRestartTime == null)
+            {
+                SmartNotifierHelper.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
+            }
+            else
+            {
+                SmartNotifierHelper.Instance.LastRestartTime = ((DateTime)SmartNotifierHelper.Instance.LastRestartTime).AddSeconds(1);
+            }
+        }
+
+        private void CheckLastRestart(object sender, DoWorkEventArgs e)
+        {
+            while (true)
+            {
+                if (SmartNotifierHelper.Instance.LastRestartTime != null)
+                {
+                    this.Dispatcher.Invoke(() =>
+                    {
+                        SmartNotifierHelper.Instance.ShowInformation("Last restart time" + SmartNotifierHelper.Instance.LastRestartTime);
+                    });
+
+                    System.Threading.Thread.Sleep(5 * 60 * 1000);  // Wait five minutes
+                }
+            }
+        }
+
+        private void AddNotifyTray()
+        {
             m_menu = new ContextMenu();
             m_menu.MenuItems.Add(0, new MenuItem("Exit", new System.EventHandler(Exit_Click)));
             nIcon.Visible = true;
@@ -39,8 +88,6 @@ namespace SmartNotifier.View
             nIcon.ContextMenu = m_menu;
             WindowState = System.Windows.WindowState.Minimized;
             Hide();
-            ListBoxMenu.SelectedIndex = 0;
-            //nIcon.ShowBalloonTip(3000, "", "Check for updates", ToolTipIcon.Info);
         }
 
         private void Exit_Click(object sender, EventArgs e)
@@ -54,7 +101,7 @@ namespace SmartNotifier.View
             WindowState = WindowState.Normal;
             Show();
             Activate();
-        }      
+        }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -95,7 +142,6 @@ namespace SmartNotifier.View
 
         private void ListBoxMenu_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            //pnlcontent.Content = "{Binding ElementName=ListBoxDelears, Path=SelectedItem}";
             if (ListBoxMenu.SelectedIndex != -1)
             {
                 pnlcontent.Content = ListBoxMenu.SelectedItem;
@@ -105,6 +151,19 @@ namespace SmartNotifier.View
         public void Drag_Window(object sender, MouseButtonEventArgs e)
         {
             this.DragMove();
+        }
+
+        public void NotifyNotificationBack(string Message)
+        {
+            Dispatcher.BeginInvoke(new ThreadStart(() =>
+          this.Dispatcher.Invoke(() =>
+          {
+              SmartNotifierHelper.Instance.ShowInformation(Message);
+          })
+       ));
+
+
+
         }
     }
 }

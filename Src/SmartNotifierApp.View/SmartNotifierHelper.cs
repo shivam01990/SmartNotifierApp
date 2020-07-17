@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,6 @@ namespace SmartNotifier.View
                 }
             }
         }
-
 
         public void ShowInformation(string message)
         {
@@ -77,5 +77,25 @@ namespace SmartNotifier.View
         {
             _vm.ClearByMessage();
         }
+
+        private NotifyServiceWCF.Service1Client _serviceInstance;
+        public NotifyServiceWCF.Service1Client ServiceInstance
+        {
+            get
+            {
+                return _serviceInstance;
+            }
+        }
+
+        public void InitializeServiceInstance()
+        {
+            //InstanceContext instanceContext = new InstanceContext(this);
+            //NotifyServiceWCF.Service1Client client = new NotifyServiceWCF.Service1Client(instanceContext);
+            NotifyServiceWCF.Service1Client client = new NotifyServiceWCF.Service1Client();
+            _serviceInstance = client;
+        }
+
+        public DateTime? LastRestartTime { get; set; } = null;
+
     }
 }

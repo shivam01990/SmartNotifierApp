@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -24,9 +25,14 @@ namespace SmartNotifier.View.View
         {
             InitializeComponent();
         }
+
         private void Button_ShowInformationClick(object sender, RoutedEventArgs e)
         {
-            SmartNotifierHelper.Instance.ShowInformation("Test message");
+            DateTime? dateTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
+            if (dateTime != null)
+            {
+                SmartNotifierHelper.Instance.ShowInformation("Last Restart Time"+ dateTime);
+            }
         }
     }
 }

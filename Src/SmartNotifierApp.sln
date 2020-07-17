@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartNotifier.View", "Smart
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartNotifier.ToastNotifications", "SmartNotifier.ToastNotifications\SmartNotifier.ToastNotifications.csproj", "{4A8879FC-9A6E-4904-910B-5C13FA5ED5BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartNotifier.Service", "SmartNotifier.Service\SmartNotifier.Service.csproj", "{4C8A69B9-B2C3-4CE5-8906-91893D9952CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4A8879FC-9A6E-4904-910B-5C13FA5ED5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A8879FC-9A6E-4904-910B-5C13FA5ED5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A8879FC-9A6E-4904-910B-5C13FA5ED5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C8A69B9-B2C3-4CE5-8906-91893D9952CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C8A69B9-B2C3-4CE5-8906-91893D9952CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C8A69B9-B2C3-4CE5-8906-91893D9952CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C8A69B9-B2C3-4CE5-8906-91893D9952CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
