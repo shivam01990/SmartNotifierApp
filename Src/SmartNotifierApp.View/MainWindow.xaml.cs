@@ -69,7 +69,7 @@ namespace SmartNotifier.View
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        SmartNotifierHelper.Instance.ShowInformation("Last restart time" + SmartNotifierHelper.Instance.LastRestartTime);
+                        SmartNotifierHelper.Instance.ShowWarning("Last restart time" + SmartNotifierHelper.Instance.LastRestartTime);
                     });
 
                     System.Threading.Thread.Sleep(5 * 60 * 1000);  // Wait five minutes

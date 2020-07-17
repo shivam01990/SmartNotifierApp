@@ -43,7 +43,7 @@ namespace SmartNotifier.View
             _vm.ShowSuccess(message);
         }
 
-        public void ShowWarningClick(string message)
+        public void ShowWarning(string message)
         {
             _vm.ShowWarning(message);
         }
