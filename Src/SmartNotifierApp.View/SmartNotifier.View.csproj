@@ -68,6 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="DB\NotifierDB.cs" />
     <Compile Include="ViewModel\Alerts\Notification.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\OverviewViewModel.cs" />

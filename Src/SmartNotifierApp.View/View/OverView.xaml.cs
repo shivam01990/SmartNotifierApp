@@ -24,15 +24,6 @@ namespace SmartNotifier.View.View
         public OverView()
         {
             InitializeComponent();
-        }
-
-        private void Button_ShowInformationClick(object sender, RoutedEventArgs e)
-        {
-            DateTime? dateTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
-            if (dateTime != null)
-            {
-                SmartNotifierHelper.Instance.ShowInformation("Last Restart Time"+ dateTime);
-            }
-        }
+        }       
     }
 }

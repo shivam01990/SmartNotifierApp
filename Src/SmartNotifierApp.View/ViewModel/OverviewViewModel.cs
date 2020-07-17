@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartNotifier.View.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,17 @@ namespace SmartNotifier.View.ViewModel
             get { return "Overview"; }
         }
 
-        public  string Icon
+        public string Icon
         {
             get { return "/Files/Overview.png"; }
+        }
+
+        public string LastRestartTime
+        {
+            get
+            {
+                return NotifierDB.Instance.LastRestartTime.ToString();
+            }
         }
     }
 }

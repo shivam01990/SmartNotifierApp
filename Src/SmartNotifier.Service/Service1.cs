@@ -16,16 +16,21 @@ namespace SmartNotifier.Service
     {
         public DateTime? GetLastRestartTime()
         {
-            // define a select query
-
-            SelectQuery query = new SelectQuery("SELECT LastBootUpTime FROM Win32_OperatingSystem WHERE Primary = 'true'");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
-            DateTime? dtBootTime= null;
-            foreach (ManagementObject mo in searcher.Get())
+            DateTime? dtBootTime = null;
+            try
             {
+                // define a select query
+                SelectQuery query = new SelectQuery("SELECT LastBootUpTime FROM Win32_OperatingSystem WHERE Primary = 'true'");
+                ManagementObjectSearcher searcher = new ManagementObjectSearcher(query);
 
-                dtBootTime = ManagementDateTimeConverter.ToDateTime(mo.Properties["LastBootUpTime"].Value.ToString());
+                foreach (ManagementObject mo in searcher.Get())
+                {
+
+                    dtBootTime = ManagementDateTimeConverter.ToDateTime(mo.Properties["LastBootUpTime"].Value.ToString());
+                }
             }
+            catch
+            { }
 
             return dtBootTime;
         }

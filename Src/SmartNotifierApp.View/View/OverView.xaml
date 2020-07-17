@@ -8,18 +8,26 @@
              d:DesignHeight="450" d:DesignWidth="550">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="115"/>
+            <ColumnDefinition Width="120"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="18" Text="Overview" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Margin="0,0,0,0" />
-        <Button Content="Test Message" Grid.Row="1" Grid.Column="0" Width="100" Click="Button_ShowInformationClick" HorizontalAlignment="Left" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="PC name" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" />
+        
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Model" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" Margin="0,0,0,0" />
+
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="RAM" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" />
+
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last restarted time" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LastRestartTime}" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Margin="0,0,0,0" />
+
     </Grid>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using SmartNotifier.View.ViewModel;
+﻿using SmartNotifier.View.DB;
+using SmartNotifier.View.ViewModel;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -10,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
+using System.Linq;
 
 namespace SmartNotifier.View
 {
@@ -38,41 +40,30 @@ namespace SmartNotifier.View
             AddNotifyTray();
             ListBoxMenu.SelectedIndex = 0;
             SmartNotifierHelper.Instance.InitializeServiceInstance();
+            NotifierDB.Instance.InitializeDB();
+            //DispatcherTimer timer = new DispatcherTimer();
+            //timer.Interval = TimeSpan.FromMilliseconds(5000);
+            //timer.Tick += timer_Tick;
+            //timer.Start();
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(1);
-            timer.Tick += timer_Tick;
-            timer.Start();
-
-            BackgroundWorker checkSystemTimer = new BackgroundWorker();
-            checkSystemTimer.DoWork += new DoWorkEventHandler(CheckLastRestart);
-            checkSystemTimer.RunWorkerAsync();
+            BackgroundWorker messageQueueWorker = new BackgroundWorker();
+            messageQueueWorker.DoWork += new DoWorkEventHandler(messageQueueDoWork);
+            messageQueueWorker.RunWorkerAsync();
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            if (SmartNotifierHelper.Instance.LastRestartTime == null)
-            {
-                SmartNotifierHelper.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
-            }
-            else
-            {
-                SmartNotifierHelper.Instance.LastRestartedTimeSpan = DateTime.Now - (DateTime)SmartNotifierHelper.Instance.LastRestartTime;
-            }
-        }
-
-        private void CheckLastRestart(object sender, DoWorkEventArgs e)
+        private void messageQueueDoWork(object sender, DoWorkEventArgs e)
         {
             while (true)
             {
-                if (SmartNotifierHelper.Instance.LastRestartTime != null && SmartNotifierHelper.Instance.LastRestartedTimeSpan.TotalHours > 2)
+                if (NotifierDB.Instance.NotificationQueue.Count > 0)
                 {
                     this.Dispatcher.Invoke(() =>
                     {
-                        SmartNotifierHelper.Instance.ShowWarning("Last restart time " + SmartNotifierHelper.Instance.LastRestartTime);
+                        SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NotificationQueue.FirstOrDefault());
                     });
 
-                    System.Threading.Thread.Sleep(5 * 60 * 1000);  // Wait five minutes
+                    NotifierDB.Instance.NotificationQueue.RemoveAt(0);
+                    Thread.Sleep(2000);  // Wait for two second
                 }
             }
         }
