@@ -112,6 +112,11 @@
     <None Include="Connected Services\NotifyServiceWCF\service1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Connected Services\NotifyServiceWCF\SmartNotifier.Common.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\DataSources\SmartNotifier.Common.DriveInformation.datasource" />
+    <None Include="Properties\DataSources\SmartNotifier.Common.SystemInforamtion.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -141,6 +146,10 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SmartNotifier.Common\SmartNotifier.Common.csproj">
+      <Project>{25edede9-0150-4857-813c-ccae41ff3ea0}</Project>
+      <Name>SmartNotifier.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SmartNotifier.Messages\SmartNotifier.ToastNotifications.Messages.csproj">
       <Project>{4de2f314-b19f-423e-92d8-7d3a7d9acea2}</Project>
       <Name>SmartNotifier.ToastNotifications.Messages</Name>

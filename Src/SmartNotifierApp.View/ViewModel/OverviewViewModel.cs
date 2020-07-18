@@ -12,13 +12,6 @@ namespace SmartNotifier.View.ViewModel
     {
         public OverviewViewModel()
         {
-
-
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            RestartInterval = NotifierDB.Instance.LastRestartedTimeSpan.ToString();
         }
 
         public string Name
@@ -31,6 +24,94 @@ namespace SmartNotifier.View.ViewModel
             get { return "/Files/Overview.png"; }
         }
 
+        public string MachineName
+        {
+            get
+            {
+                return Environment.MachineName.ToString();
+            }
+        }
+
+        public string RAM
+        {
+            get
+            {
+                if (NotifierDB.Instance.SystemInfo != null && NotifierDB.Instance.SystemInfo.RAM != null)
+                {
+                    decimal memory = decimal.Parse(NotifierDB.Instance.SystemInfo.RAM);
+                    memory = memory / (1024 * 1024 * 1024);
+                    return memory.ToString("#.##") + " GB";
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string SystemType
+        {
+            get
+            {
+                return NotifierDB.Instance.SystemInfo?.SystemType ?? string.Empty;
+            }
+        }
+
+        public string SystemModel
+        {
+            get
+            {
+                return NotifierDB.Instance.SystemInfo?.SystemModel ?? string.Empty;
+            }
+        }
+
+        public string CDriveInfo
+        {
+            get
+            {
+                if (NotifierDB.Instance.DriveDetails != null)
+                {
+                    return NotifierDB.Instance.DriveDetails.CTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.CTotalSize;
+                }
+
+                return "NA";
+            }
+        }
+
+        public string DDriveInfo
+        {
+            get
+            {
+                if (NotifierDB.Instance.DriveDetails != null)
+                {
+                    return NotifierDB.Instance.DriveDetails.DTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.DTotalSize;
+                }
+
+                return "NA";
+            }
+        }
+
+        public int CDriveProgress
+        {
+            get
+            {
+                if (NotifierDB.Instance.DriveDetails != null && NotifierDB.Instance.DriveDetails.CTotalSize > 0)
+                {
+                    return (int)((NotifierDB.Instance.DriveDetails.CTotalSize - NotifierDB.Instance.DriveDetails.CTotalFreeSpace) * 100 / NotifierDB.Instance.DriveDetails.CTotalSize);
+                }
+                return 0;
+            }
+        }
+
+        public int DDriveProgress
+        {
+            get
+            {
+                if (NotifierDB.Instance.DriveDetails != null && NotifierDB.Instance.DriveDetails.DTotalSize > 0)
+                {
+                    return (int)((NotifierDB.Instance.DriveDetails.DTotalSize - NotifierDB.Instance.DriveDetails.DTotalFreeSpace) * 100 / NotifierDB.Instance.DriveDetails.DTotalSize);
+                }
+                return 0;
+            }
+        }
 
 
         private DispatcherTimer timer;
@@ -60,7 +141,22 @@ namespace SmartNotifier.View.ViewModel
             {
                 restartInterval = value;
                 RaisedPropertyChanged(nameof(RestartInterval));
+                RaisedPropertyChanged(nameof(LastRestartTime));
+                RaisedPropertyChanged(nameof(RAM));
+                RaisedPropertyChanged(nameof(SystemType));
+                RaisedPropertyChanged(nameof(SystemModel));
+                RaisedPropertyChanged(nameof(CDriveInfo));
+                RaisedPropertyChanged(nameof(DDriveInfo));
+                RaisedPropertyChanged(nameof(CDriveProgress));
+                RaisedPropertyChanged(nameof(DDriveProgress));
+
             }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            TimeSpan span = NotifierDB.Instance.LastRestartedTimeSpan;
+            RestartInterval = String.Format("{0} days, {1} hours, {2} minutes, {3} seconds", span.Days, span.Hours, span.Minutes, span.Seconds);
         }
 
 

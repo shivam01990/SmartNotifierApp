@@ -26,6 +26,18 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetLastRestartTime", ReplyAction="http://tempuri.org/IService1/GetLastRestartTimeResponse")]
         System.Threading.Tasks.Task<System.Nullable<System.DateTime>> GetLastRestartTimeAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSystemInforamtion", ReplyAction="http://tempuri.org/IService1/GetSystemInforamtionResponse")]
+        SmartNotifier.Common.SystemInforamtion GetSystemInforamtion();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetSystemInforamtion", ReplyAction="http://tempuri.org/IService1/GetSystemInforamtionResponse")]
+        System.Threading.Tasks.Task<SmartNotifier.Common.SystemInforamtion> GetSystemInforamtionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDriveInforamtion", ReplyAction="http://tempuri.org/IService1/GetDriveInforamtionResponse")]
+        SmartNotifier.Common.DriveInformation GetDriveInforamtion();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDriveInforamtion", ReplyAction="http://tempuri.org/IService1/GetDriveInforamtionResponse")]
+        System.Threading.Tasks.Task<SmartNotifier.Common.DriveInformation> GetDriveInforamtionAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +81,22 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         public System.Threading.Tasks.Task<System.Nullable<System.DateTime>> GetLastRestartTimeAsync() {
             return base.Channel.GetLastRestartTimeAsync();
+        }
+        
+        public SmartNotifier.Common.SystemInforamtion GetSystemInforamtion() {
+            return base.Channel.GetSystemInforamtion();
+        }
+        
+        public System.Threading.Tasks.Task<SmartNotifier.Common.SystemInforamtion> GetSystemInforamtionAsync() {
+            return base.Channel.GetSystemInforamtionAsync();
+        }
+        
+        public SmartNotifier.Common.DriveInformation GetDriveInforamtion() {
+            return base.Channel.GetDriveInforamtion();
+        }
+        
+        public System.Threading.Tasks.Task<SmartNotifier.Common.DriveInformation> GetDriveInforamtionAsync() {
+            return base.Channel.GetDriveInforamtionAsync();
         }
     }
 }

@@ -37,6 +37,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/SmartNotifier.Common" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IService1_MonitorNotifications_InputMessage">
@@ -51,6 +52,18 @@
   <wsdl:message name="IService1_GetLastRestartTime_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetLastRestartTimeResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetSystemInforamtion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemInforamtion" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetSystemInforamtion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSystemInforamtionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDriveInforamtion_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriveInforamtion" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetDriveInforamtion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDriveInforamtionResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="MonitorNotifications">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/MonitorNotifications" message="tns:IService1_MonitorNotifications_InputMessage" />
@@ -59,6 +72,14 @@
     <wsdl:operation name="GetLastRestartTime">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLastRestartTime" message="tns:IService1_GetLastRestartTime_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLastRestartTimeResponse" message="tns:IService1_GetLastRestartTime_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemInforamtion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetSystemInforamtion" message="tns:IService1_GetSystemInforamtion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetSystemInforamtionResponse" message="tns:IService1_GetSystemInforamtion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDriveInforamtion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDriveInforamtion" message="tns:IService1_GetDriveInforamtion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDriveInforamtionResponse" message="tns:IService1_GetDriveInforamtion_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NotifierSvcNetTcpEndPoint" type="tns:IService1">
@@ -76,6 +97,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetLastRestartTime">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetLastRestartTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSystemInforamtion">
+      <soap12:operation soapAction="http://tempuri.org/IService1/GetSystemInforamtion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDriveInforamtion">
+      <soap12:operation soapAction="http://tempuri.org/IService1/GetDriveInforamtion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

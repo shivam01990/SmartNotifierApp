@@ -41,30 +41,23 @@ namespace SmartNotifier.View
             ListBoxMenu.SelectedIndex = 0;
             SmartNotifierHelper.Instance.InitializeServiceInstance();
             NotifierDB.Instance.InitializeDB();
-            //DispatcherTimer timer = new DispatcherTimer();
-            //timer.Interval = TimeSpan.FromMilliseconds(5000);
-            //timer.Tick += timer_Tick;
-            //timer.Start();
 
-            BackgroundWorker messageQueueWorker = new BackgroundWorker();
-            messageQueueWorker.DoWork += new DoWorkEventHandler(messageQueueDoWork);
-            messageQueueWorker.RunWorkerAsync();
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(5);
+            timer.Tick += timer_Tick;
+            timer.Start();
         }
 
-        private void messageQueueDoWork(object sender, DoWorkEventArgs e)
+        private void timer_Tick(object sender, EventArgs e)
         {
-            while (true)
+            if (NotifierDB.Instance.NotificationQueue.Count > 0)
             {
-                if (NotifierDB.Instance.NotificationQueue.Count > 0)
+                this.Dispatcher.Invoke(() =>
                 {
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NotificationQueue.FirstOrDefault());
-                    });
+                    SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NotificationQueue.FirstOrDefault());
+                });
 
-                    NotifierDB.Instance.NotificationQueue.RemoveAt(0);
-                    Thread.Sleep(2000);  // Wait for two second
-                }
+                NotifierDB.Instance.NotificationQueue.RemoveAt(0);                
             }
         }
 

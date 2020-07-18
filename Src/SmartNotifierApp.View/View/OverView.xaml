@@ -8,6 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="550">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
@@ -20,12 +25,16 @@
             <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="18" Text="Overview" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Margin="0,0,0,0" />
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="PC name" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" />
-        
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="18" Text="Overview" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Margin="0,0,0,0" />
+
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Machine name" FontWeight="Bold" Grid.Column="0" Grid.Row="1" Margin="0,0.4,0,8.4" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding MachineName}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" />
+
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Model" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SystemModel}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" />
 
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="RAM" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding RAM}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="3" Margin="0,0,0,0" />
 
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last restarted time" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LastRestartTime}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Margin="0,0,0,0" />
@@ -33,5 +42,16 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Restarted Interval" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="5" Margin="0,0,0,0" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding RestartInterval}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="5" Margin="0,0,0,0" />
 
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="System Type" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="6" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding SystemType}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="6" Margin="0,0,0,0" />
+       
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="C Drive Info" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="7" Margin="0,0,0,0" />
+        <ProgressBar  Grid.Row="7" Grid.Column="1" Value="{Binding CDriveProgress, Mode=OneWay}" Height="20" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding  CDriveInfo}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="8" Margin="0,0,0,0" />
+        
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="D Drive Info" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="9" Margin="0,0,0,0" />
+        <ProgressBar  Grid.Row="9" Grid.Column="1"  Value="{Binding DDriveProgress, Mode=OneWay}" Height="20" Width="300" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding DDriveInfo}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="10" Margin="0,0,0,0" />
+        
     </Grid>
 </UserControl>

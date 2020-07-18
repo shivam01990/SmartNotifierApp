@@ -1,9 +1,11 @@
-﻿using System;
+﻿using SmartNotifier.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace SmartNotifier.View.DB
 {
@@ -32,28 +34,53 @@ namespace SmartNotifier.View.DB
         public List<string> NotificationQueue = new List<string>();
         public void InitializeDB()
         {
-            BackgroundWorker dbworker = new BackgroundWorker();
-            dbworker.DoWork += new DoWorkEventHandler(ProcessDB);
-            dbworker.RunWorkerAsync();
+            dbworker_Tick(null, null);
+            DispatcherTimer dbworker = new DispatcherTimer();
+            dbworker.Interval = TimeSpan.FromSeconds(20);
+            dbworker.Tick += dbworker_Tick;
+            dbworker.Start();
         }
 
-        private void ProcessDB(object sender, DoWorkEventArgs e)
+        private void dbworker_Tick(object sender, EventArgs e)
         {
-            while (true)
+            //Check Last Restart Time
+            if (NotifierDB.Instance.LastRestartTime == null)
             {
-                //Check Last Restart Time
-                if (NotifierDB.Instance.LastRestartTime == null)
+                NotifierDB.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
+                if (NotifierDB.Instance.LastRestartTime != null && NotifierDB.Instance.LastRestartedTimeSpan.TotalHours > 0)
                 {
-                    NotifierDB.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
-                    if (NotifierDB.Instance.LastRestartTime != null && NotifierDB.Instance.LastRestartedTimeSpan.TotalHours > 0)
-                    {
-                        NotificationQueue.Add("Console last restart time was " + NotifierDB.Instance.LastRestartTime + ". It is recommend to restart the machine.");
-                    }
+                    NotificationQueue.Add("Console last restart time was " + NotifierDB.Instance.LastRestartTime + ". It is recommend to restart the machine for better performance.");
                 }
+            }
 
-                System.Threading.Thread.Sleep(5 * 60 * 1000);  // Wait five minutes
+            if (NotifierDB.Instance.SystemInfo == null)
+            {
+                SystemInfo = SmartNotifierHelper.Instance.ServiceInstance.GetSystemInforamtion();
+            }
+
+            DriveDetails = SmartNotifierHelper.Instance.ServiceInstance.GetDriveInforamtion();
+
+            if (DriveDetails != null)
+            {
+                string drivespaceNotification = string.Empty;
+                if (DriveDetails.CTotalFreeSpace < 100 && DriveDetails.CTotalSize > DriveDetails.CTotalFreeSpace)
+                {
+                    drivespaceNotification = Environment.NewLine + " C: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
+                }
+                if (DriveDetails.DTotalFreeSpace < 100 && DriveDetails.DTotalSize > DriveDetails.DTotalFreeSpace)
+                {
+                    drivespaceNotification = Environment.NewLine + " D: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
+                }
+                if (drivespaceNotification.Length > 0)
+                {
+                    NotificationQueue.Add("Drive free space is less." + drivespaceNotification + "Please cleanup the space");
+                }
             }
         }
+
+        public DriveInformation DriveDetails { get; set; } = null;
+
+        public SystemInforamtion SystemInfo { get; set; } = null;
 
         public DateTime? LastRestartTime { get; set; } = null;
 
@@ -69,6 +96,8 @@ namespace SmartNotifier.View.DB
                 return TimeSpan.Zero;
             }
         }
+
+
 
 
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d17e2ac7-14d5-4de0-b1ee-42ab416f7e54" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="0d87dacd-7c8e-444c-9e91-78d51ed5e7dd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,9 +22,10 @@
     <MetadataSource Address="net.tcp://localhost:8321/NotifierSvc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="1c997de8-89cb-4432-ae2b-dec241ebdea5" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f474811c-601d-44c9-ada8-afd916d99153" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="dbedb565-7306-498d-b489-6b8825584726" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="e22e9b57-0dbf-46d2-bc82-3cd0dba2680c" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="2ed98edf-1ab6-4bc6-af21-bdd20047e4ea" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="eab7c04e-b3f3-42d6-b448-b3c61e01d231" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
+    <MetadataFile FileName="SmartNotifier.Common.xsd" MetadataType="Schema" ID="d5eb6d48-f724-47eb-acdd-791cbfd89273" SourceId="1" SourceUrl="net.tcp://localhost:8321/NotifierSvc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
