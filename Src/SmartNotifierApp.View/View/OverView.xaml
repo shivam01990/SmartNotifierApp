@@ -13,10 +13,11 @@
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
             <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" FontSize="18" Text="Overview" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Margin="0,0,0,0" />
@@ -27,7 +28,10 @@
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="RAM" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="3" Margin="0,0,0,0" />
 
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Last restarted time" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="4" Margin="0,0,0,0" />
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LastRestartTime}" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding LastRestartTime}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="4" Margin="0,0,0,0" />
+
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Restarted Interval" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Grid.Row="5" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding RestartInterval}"  VerticalAlignment="Top" Grid.Column="1" Grid.Row="5" Margin="0,0,0,0" />
 
     </Grid>
 </UserControl>
