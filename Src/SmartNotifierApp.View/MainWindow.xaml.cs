@@ -40,7 +40,7 @@ namespace SmartNotifier.View
             AddNotifyTray();
             ListBoxMenu.SelectedIndex = 0;
             SmartNotifierHelper.Instance.InitializeServiceInstance();
-            NotifierDB.Instance.InitializeDB();
+            NotifierDB.Instance.InitializeDB((MainWindowViewModel)DataContext);
 
             // Approch can be to be modify by eventHandler
             DispatcherTimer timer = new DispatcherTimer();

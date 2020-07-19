@@ -6,7 +6,7 @@
         xmlns:Convertor="clr-namespace:SmartNotifier.View.Converters"
         xmlns:View="clr-namespace:SmartNotifier.View.View"
         Title="Smart Notifier App" Height="600" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
-        FontFamily="Arial" Background="Transparent"  MouseLeftButtonDown="Drag_Window"  Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
+        FontFamily="Arial" Background="Transparent"  MouseLeftButtonDown="Drag_Window" Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CloseCommand_Executed"/>
         <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute_1" Executed="MiniMize_Execute" />
@@ -15,7 +15,7 @@
         <Grid.Resources>
             <Convertor:ImageToSourceConverter x:Key="ImageSourceConverter">
             </Convertor:ImageToSourceConverter>
-            
+
             <DataTemplate DataType="{x:Type ViewModel:OverviewViewModel}">
                 <View:OverView/>
             </DataTemplate>
@@ -35,11 +35,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!--<Expander Header="Menu" IsExpanded="True"  Height="500" Width="150" >-->
         <ListBox x:Name="ListBoxMenu"                    
                  Grid.Column="0"
                  ItemsSource="{Binding MainMenu}"
-                  Width="199" SelectionChanged="ListBoxMenu_SelectionChanged"  >
+                 SelectionChanged="ListBoxMenu_SelectionChanged"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -49,7 +48,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <!--</Expander>-->
+
         <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020"   BorderThickness="3,0,0,0">
             <ContentControl Name="pnlcontent" Width="550" Height="450" />
         </Border>

@@ -1,4 +1,5 @@
 ﻿using SmartNotifier.Common;
+using SmartNotifier.View.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,8 +16,11 @@ namespace SmartNotifier.View.DB
         private static NotifierDB instance = null;
         private static readonly object padlock = new object();
 
+        private MainWindowViewModel MainWindowViewModelInstance = null;
+
         NotifierDB()
         { }
+
         public static NotifierDB Instance
         {
             get
@@ -57,8 +61,9 @@ namespace SmartNotifier.View.DB
             }
         }
 
-        public void InitializeDB()
+        public void InitializeDB(MainWindowViewModel mainwindowviewmodelinstance)
         {
+            MainWindowViewModelInstance = mainwindowviewmodelinstance;
             dbworker_Tick(null, null);
             DispatcherTimer dbworker = new DispatcherTimer();
             dbworker.Interval = TimeSpan.FromSeconds(20);
@@ -129,7 +134,7 @@ namespace SmartNotifier.View.DB
         {
             if (NotifierDB.Instance.LastRestartTime == null)
             {
-                NotifierDB.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();                
+                NotifierDB.Instance.LastRestartTime = SmartNotifierHelper.Instance.ServiceInstance.GetLastRestartTime();
             }
 
             if (NotifierDB.Instance.LastRestartTime != null && NotifierDB.Instance.LastRestartedTimeSpan.TotalHours > AppSettings.ValidateRestartTime)
