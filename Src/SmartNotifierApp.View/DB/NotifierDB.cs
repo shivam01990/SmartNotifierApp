@@ -9,6 +9,7 @@ using System.Windows.Threading;
 
 namespace SmartNotifier.View.DB
 {
+    //NotifierDB Pub Sub Model
     public class NotifierDB
     {
         private static NotifierDB instance = null;
@@ -107,7 +108,7 @@ namespace SmartNotifier.View.DB
                 }
                 if (DriveDetails.DTotalFreeSpace < AppSettings.ThresholdSpaceForNotificationAlert && DriveDetails.DTotalSize > DriveDetails.DTotalFreeSpace)
                 {
-                    drivespaceNotification = Environment.NewLine + " D: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
+                    drivespaceNotification = Environment.NewLine + " D: " + DriveDetails.DTotalFreeSpace + " GB" + Environment.NewLine;
                 }
                 if (drivespaceNotification.Length > 0)
                 {

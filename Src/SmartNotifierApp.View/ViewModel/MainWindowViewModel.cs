@@ -27,7 +27,6 @@ namespace SmartNotifier.View.ViewModel
 
         }
 
-
         public MainWindowViewModel()
         {
             worker.DoWork += worker_DoWork;
