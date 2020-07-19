@@ -14,17 +14,17 @@ namespace SmartNotifier.View.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private readonly BackgroundWorker worker = new BackgroundWorker();
-        private ObservableCollection<ViewModelBase> _delarsMenu;
+        private ObservableCollection<ViewModelBase> _mainMenu;
+        private ObservableCollection<ViewModelBase> temp_mainMenu = new ObservableCollection<ViewModelBase>();
 
-        public ObservableCollection<ViewModelBase> DelarsMenu
+        public ObservableCollection<ViewModelBase> MainMenu
         {
-            get { return this._delarsMenu; }
+            get { return this._mainMenu; }
             set
             {
-                _delarsMenu = value;
-                RaisedPropertyChanged("DelarsMenu");
+                _mainMenu = value;
+                RaisedPropertyChanged(nameof(MainMenu));
             }
-
         }
 
         public MainWindowViewModel()
@@ -34,21 +34,17 @@ namespace SmartNotifier.View.ViewModel
             worker.RunWorkerAsync();
         }
 
-
-
-        ObservableCollection<ViewModelBase> temp_delarsMenu = new ObservableCollection<ViewModelBase>();
-
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             #region Dealer Menu
-            temp_delarsMenu.Add(new OverviewViewModel());
+            temp_mainMenu.Add(new OverviewViewModel());
+            temp_mainMenu.Add(new ProcessViewModel());
             #endregion
-
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            DelarsMenu = temp_delarsMenu;
+            MainMenu = temp_mainMenu;
         }
 
     }

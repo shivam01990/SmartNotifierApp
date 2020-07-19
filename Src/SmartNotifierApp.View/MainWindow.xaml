@@ -19,6 +19,9 @@
             <DataTemplate DataType="{x:Type ViewModel:OverviewViewModel}">
                 <View:OverView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:ProcessViewModel}">
+                <View:ProcessView/>
+            </DataTemplate>
 
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -32,7 +35,7 @@
         <!--<Expander Header="Menu" IsExpanded="True"  Height="500" Width="150" >-->
         <ListBox x:Name="ListBoxMenu"                    
                  Grid.Column="0"
-                 ItemsSource="{Binding DelarsMenu}"
+                 ItemsSource="{Binding MainMenu}"
                   Width="199" SelectionChanged="ListBoxMenu_SelectionChanged"  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
