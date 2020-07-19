@@ -39,6 +39,7 @@ namespace SmartNotifier.View.ViewModel
             #region Dealer Menu
             temp_mainMenu.Add(new OverviewViewModel());
             temp_mainMenu.Add(new ProcessViewModel());
+            temp_mainMenu.Add(new NotifierViewModel());
             #endregion
         }
 
