@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonEnum.cs" />
     <Compile Include="DriveInformation.cs" />
+    <Compile Include="NotificationEntity.cs" />
     <Compile Include="SystemInforamtion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

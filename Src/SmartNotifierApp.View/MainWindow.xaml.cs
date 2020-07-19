@@ -42,22 +42,30 @@ namespace SmartNotifier.View
             SmartNotifierHelper.Instance.InitializeServiceInstance();
             NotifierDB.Instance.InitializeDB();
 
+            // Approch can be to be modify by eventHandler
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += timer_Tick;
             timer.Start();
+            //NotifierDB.Instance.NotifyMessageExecutionHandler += OnRecevingNotification;
         }
+
+        //private void OnRecevingNotification(object sender, EventArgs e)
+        //{
+        //    this.Dispatcher.Invoke(() =>
+        //    {
+        //        SmartNotifierHelper.Instance.ShowWarning(sender.ToString());
+        //    });
+        //}
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            if (NotifierDB.Instance.NotificationQueue.Count > 0)
+            if (NotifierDB.Instance.NewNotificationQueue.Count > 0)
             {
                 this.Dispatcher.Invoke(() =>
                 {
-                    SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NotificationQueue.FirstOrDefault());
+                    SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NewNotificationQueue.Dequeue().NotificationMessage);
                 });
-
-                NotifierDB.Instance.NotificationQueue.RemoveAt(0);                
             }
         }
 

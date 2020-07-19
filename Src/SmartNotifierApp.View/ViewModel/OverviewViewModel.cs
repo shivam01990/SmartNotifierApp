@@ -69,7 +69,7 @@ namespace SmartNotifier.View.ViewModel
             {
                 if (NotifierDB.Instance.DriveDetails != null)
                 {
-                    return NotifierDB.Instance.DriveDetails.CTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.CTotalSize;
+                    return NotifierDB.Instance.DriveDetails.CTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.CTotalSize + " GB";
                 }
 
                 return "NA";
@@ -82,7 +82,7 @@ namespace SmartNotifier.View.ViewModel
             {
                 if (NotifierDB.Instance.DriveDetails != null)
                 {
-                    return NotifierDB.Instance.DriveDetails.DTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.DTotalSize;
+                    return NotifierDB.Instance.DriveDetails.DTotalFreeSpace + " GB " + "free of " + NotifierDB.Instance.DriveDetails.DTotalSize + " GB";
                 }
 
                 return "NA";
