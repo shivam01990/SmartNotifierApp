@@ -5,27 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartNotifier.View.View"
              mc:Ignorable="d" 
-              d:DesignHeight="450" d:DesignWidth="550">
+             d:DesignHeight="450" d:DesignWidth="550" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock HorizontalAlignment="Left" Grid.ColumnSpan="2" FontSize="18" Text="Received Notifications" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Margin="0,0,0,0" />
+        <TextBlock HorizontalAlignment="Left"  FontSize="18" Text="Received Notifications" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Margin="0,0,0,0" />
+        <ListBox x:Name="ListBoxNotifications" SelectionMode="Multiple" Margin="-20,0,0,0" Background="Transparent" BorderBrush="Transparent"  ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"          
+                 Grid.Row="1" SelectedIndex="0"
+                 ItemsSource="{Binding NotificationList}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <ListBox.ItemTemplate>               
+                <DataTemplate>
+                    <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020" Width="580"  HorizontalAlignment="Stretch" BorderThickness="0,0,0,0">
+                        <TextBlock Foreground="White" Text="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2"/>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
 
     </Grid>
 </UserControl>

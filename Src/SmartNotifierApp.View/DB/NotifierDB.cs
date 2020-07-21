@@ -91,6 +91,12 @@ namespace SmartNotifier.View.DB
                 NewNotificationQueue.Enqueue(notificationParam);
                 OldNotificationQueue.Enqueue(notificationParam);
             }
+
+            if (MainWindowViewModelInstance.MainMenu != null)
+            {
+                NotifierViewModel notifyviewmodel = (NotifierViewModel)MainWindowViewModelInstance.MainMenu.Where(x => x.GetType().Name == nameof(NotifierViewModel)).FirstOrDefault();
+                notifyviewmodel.NotifyAllMessageExecutionHandler(null, null);
+            }
         }
 
         private void dbworker_Tick(object sender, EventArgs e)

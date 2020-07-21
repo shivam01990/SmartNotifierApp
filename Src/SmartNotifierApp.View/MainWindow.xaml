@@ -50,7 +50,7 @@
         </ListBox>
 
         <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020"   BorderThickness="3,0,0,0">
-            <ContentControl Name="pnlcontent" Width="550" Height="450" />
+            <ContentControl Name="pnlcontent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="20,20,0,0" />
         </Border>
     </Grid>
 </Window>
