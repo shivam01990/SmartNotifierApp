@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -74,7 +75,7 @@ namespace SmartNotifier.Service
             DriveInfo cdrive = new DriveInfo("C");
             if (DriveInfo.GetDrives().Any(x => x.Name == @"C:\"))
             {
-                driveinfo.CTotalFreeSpace = cdrive.TotalFreeSpace/(1024*1024*1024);
+                driveinfo.CTotalFreeSpace = cdrive.TotalFreeSpace / (1024 * 1024 * 1024);
                 driveinfo.CTotalSize = cdrive.TotalSize / (1024 * 1024 * 1024);
             }
 
@@ -85,6 +86,19 @@ namespace SmartNotifier.Service
                 driveinfo.DTotalSize = ddrive.TotalSize / (1024 * 1024 * 1024);
             }
             return driveinfo;
+        }
+
+        public List<ConsoleProcesses> GetConsoleProcesses()
+        {
+            //get a list of all running processes on current system
+            Process[] systemprocesses = Process.GetProcesses();
+            List<ConsoleProcesses> consoleprocess = ConsoleProcesses.GetConsoleProcesses();
+            foreach (var process in consoleprocess)
+            {
+                process.Status = ConsoleProcesses.GetProcessStatus(process.ActualProcessName, systemprocesses);
+            }
+
+            return consoleprocess;
         }
     }
 }

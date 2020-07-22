@@ -46,6 +46,8 @@ namespace SmartNotifier.View.DB
 
         public SystemInforamtion SystemInfo { get; set; } = null;
 
+        public List<ConsoleProcesses> ConsoleProssesesList { get; set; } = null;
+
         public DateTime? LastRestartTime { get; set; } = null;
 
         public TimeSpan LastRestartedTimeSpan
@@ -66,7 +68,7 @@ namespace SmartNotifier.View.DB
             MainWindowViewModelInstance = mainwindowviewmodelinstance;
             dbworker_Tick(null, null);
             DispatcherTimer dbworker = new DispatcherTimer();
-            dbworker.Interval = TimeSpan.FromSeconds(20);
+            dbworker.Interval = TimeSpan.FromSeconds(15);
             dbworker.Tick += dbworker_Tick;
             dbworker.Start();
         }
@@ -103,7 +105,46 @@ namespace SmartNotifier.View.DB
         {
             //Check Last Restart Time
             ValidateLastRestart();
+            //Check Hard disk space
             ValidateDriveDetails();
+            //Check Console Processes 
+            List<ConsoleProcesses> NewConsoleProcess = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleProcesses().ToList();
+            bool isProcessUpdate = false;
+            if (ConsoleProssesesList != null)
+            {
+                isProcessUpdate = (from n in NewConsoleProcess
+                                   join o in ConsoleProssesesList
+                                   on n.ActualProcessName equals o.ActualProcessName
+                                   where n.Status != o.Status
+                                   && n.Status != ProcessStatus.Running
+                                   select n).Count() > 0;
+            }
+            else
+            {
+                isProcessUpdate = NewConsoleProcess.Where(x => x.Status != ProcessStatus.Running).Count() > 0;
+            }
+
+            if (isProcessUpdate)
+            {
+                string processmessage = "Following Processes/Services are not running in Console." + Environment.NewLine +
+                    string.Join(", ", NewConsoleProcess.Where(x => x.Status != ProcessStatus.Running).Select(x => x.ProcessName));
+                AddMessageToNotificationQueue(
+                    new NotificationEntity()
+                    {
+                        NotificationMessage = processmessage,
+                        NotificationMessageType = MessageType.Error,
+                        NotificationTypeOf = NotificationType.ServiceAndProcesses,
+                        NotifyOn = DateTime.Now
+                    }, true);
+            }
+
+            ConsoleProssesesList = NewConsoleProcess;
+            if (MainWindowViewModelInstance.MainMenu != null)
+            {
+                ProcessViewModel processesviewmodel = (ProcessViewModel)MainWindowViewModelInstance.MainMenu.Where(x => x.GetType().Name == nameof(ProcessViewModel)).FirstOrDefault();
+                processesviewmodel.ProcessesExecutionHandler(null, null);
+            }
+
         }
 
         private void ValidateDriveDetails()

@@ -38,6 +38,12 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDriveInforamtion", ReplyAction="http://tempuri.org/IService1/GetDriveInforamtionResponse")]
         System.Threading.Tasks.Task<SmartNotifier.Common.DriveInformation> GetDriveInforamtionAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleProcesses", ReplyAction="http://tempuri.org/IService1/GetConsoleProcessesResponse")]
+        SmartNotifier.Common.ConsoleProcesses[] GetConsoleProcesses();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleProcesses", ReplyAction="http://tempuri.org/IService1/GetConsoleProcessesResponse")]
+        System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleProcesses[]> GetConsoleProcessesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +103,14 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         public System.Threading.Tasks.Task<SmartNotifier.Common.DriveInformation> GetDriveInforamtionAsync() {
             return base.Channel.GetDriveInforamtionAsync();
+        }
+        
+        public SmartNotifier.Common.ConsoleProcesses[] GetConsoleProcesses() {
+            return base.Channel.GetConsoleProcesses();
+        }
+        
+        public System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleProcesses[]> GetConsoleProcessesAsync() {
+            return base.Channel.GetConsoleProcessesAsync();
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Linq;
+using SmartNotifier.Common;
 
 namespace SmartNotifier.View
 {
@@ -64,7 +65,23 @@ namespace SmartNotifier.View
             {
                 this.Dispatcher.Invoke(() =>
                 {
-                    SmartNotifierHelper.Instance.ShowWarning(NotifierDB.Instance.NewNotificationQueue.Dequeue().NotificationMessage);
+                    NotificationEntity message = NotifierDB.Instance.NewNotificationQueue.Dequeue();
+                    switch (message.NotificationMessageType)
+                    {
+                        case MessageType.Error:
+                            SmartNotifierHelper.Instance.ShowError(message.NotificationMessage);
+                            break;
+                        case MessageType.Warninig:
+                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationMessage);
+                            break;
+                        case MessageType.Information:
+                            SmartNotifierHelper.Instance.ShowInformation(message.NotificationMessage);
+                            break;
+                        default:
+                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationMessage);
+                            break;
+                    }
+
                 });
             }
         }

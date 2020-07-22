@@ -9,13 +9,22 @@ namespace SmartNotifier.Common
     public enum NotificationType
     {
         RestartNotification,
-        DiskSpaceNotification
+        DiskSpaceNotification,
+        ServiceAndProcesses
     }
 
     public enum MessageType
     {
         Warninig,
         Information,
-        Error
+        Error        
+    }
+
+    public enum ProcessStatus
+    {
+        Running,
+        Stopped,
+        NotResponding,
+        NA
     }
 }

@@ -4,28 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartNotifier.View.View"
+             xmlns:Convertor="clr-namespace:SmartNotifier.View.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.Resources>
+            <Convertor:MessageTypeStatusConvertor x:Key="MessageTypeStatusConvertor">
+            </Convertor:MessageTypeStatusConvertor>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="125"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left" Grid.ColumnSpan="2" FontSize="18" Text="Console Process/Services" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Margin="0,0,0,0" />
+        <ItemsControl x:Name="ItemControlProcesses"  BorderBrush="Transparent" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"          
+                 Grid.Row="1" 
+                 ItemsSource="{Binding ProcessList}"
+                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Width="200" ToolTip="{Binding ProcessName}" Text="{Binding ProcessName}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="3"/>
+                        <Ellipse Width="15" Height="15" ToolTip="{Binding Status}" Fill="{Binding Status,Converter={StaticResource MessageTypeStatusConvertor}}" StrokeThickness="1" Stroke="White"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
     </Grid>
 </UserControl>

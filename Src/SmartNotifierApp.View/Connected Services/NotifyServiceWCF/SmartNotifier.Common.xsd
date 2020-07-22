@@ -17,4 +17,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="DriveInformation" nillable="true" type="tns:DriveInformation" />
+  <xs:complexType name="ArrayOfConsoleProcesses">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConsoleProcesses" nillable="true" type="tns:ConsoleProcesses" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConsoleProcesses" nillable="true" type="tns:ArrayOfConsoleProcesses" />
+  <xs:complexType name="ConsoleProcesses">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualProcessName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ProcessName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Status" type="tns:ProcessStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConsoleProcesses" nillable="true" type="tns:ConsoleProcesses" />
+  <xs:simpleType name="ProcessStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Running" />
+      <xs:enumeration value="Stopped" />
+      <xs:enumeration value="NotResponding" />
+      <xs:enumeration value="NA" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessStatus" nillable="true" type="tns:ProcessStatus" />
 </xs:schema>

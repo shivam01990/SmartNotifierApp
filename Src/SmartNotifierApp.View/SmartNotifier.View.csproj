@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Converters\MessageTypeStatusConvertor.cs" />
     <Compile Include="DB\NotifierDB.cs" />
     <Compile Include="ViewModel\Alerts\Notification.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -125,6 +126,7 @@
     <None Include="Connected Services\NotifyServiceWCF\SmartNotifier.Common.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\DataSources\SmartNotifier.Common.ConsoleProcesses.datasource" />
     <None Include="Properties\DataSources\SmartNotifier.Common.DriveInformation.datasource" />
     <None Include="Properties\DataSources\SmartNotifier.Common.SystemInforamtion.datasource" />
     <None Include="Properties\Settings.settings">
@@ -220,6 +222,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Files\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Files\Green.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Files\Red.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

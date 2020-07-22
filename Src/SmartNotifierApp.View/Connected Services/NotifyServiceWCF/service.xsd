@@ -47,4 +47,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetConsoleProcesses">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConsoleProcessesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/SmartNotifier.Common" minOccurs="0" name="GetConsoleProcessesResult" nillable="true" type="q3:ArrayOfConsoleProcesses" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

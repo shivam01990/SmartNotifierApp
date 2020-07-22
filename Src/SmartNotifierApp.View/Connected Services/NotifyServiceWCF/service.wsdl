@@ -64,6 +64,12 @@
   <wsdl:message name="IService1_GetDriveInforamtion_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDriveInforamtionResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetConsoleProcesses_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsoleProcesses" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetConsoleProcesses_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsoleProcessesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
     <wsdl:operation name="MonitorNotifications">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/MonitorNotifications" message="tns:IService1_MonitorNotifications_InputMessage" />
@@ -80,6 +86,10 @@
     <wsdl:operation name="GetDriveInforamtion">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetDriveInforamtion" message="tns:IService1_GetDriveInforamtion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetDriveInforamtionResponse" message="tns:IService1_GetDriveInforamtion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetConsoleProcesses">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetConsoleProcesses" message="tns:IService1_GetConsoleProcesses_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetConsoleProcessesResponse" message="tns:IService1_GetConsoleProcesses_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NotifierSvcNetTcpEndPoint" type="tns:IService1">
@@ -115,6 +125,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDriveInforamtion">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetDriveInforamtion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsoleProcesses">
+      <soap12:operation soapAction="http://tempuri.org/IService1/GetConsoleProcesses" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

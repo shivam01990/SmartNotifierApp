@@ -24,6 +24,8 @@ namespace SmartNotifier.Service
         [OperationContract]
         DriveInformation GetDriveInforamtion();
 
+        [OperationContract]
+        List<ConsoleProcesses> GetConsoleProcesses();
     }
 
     public interface IServiceCallback
