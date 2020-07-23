@@ -122,8 +122,11 @@ namespace SmartNotifier.Service
                     {
                         consoleInfo.CouchType = line.Replace("Couch-Type =", string.Empty).Replace("\"", string.Empty).Trim();
                     }
-                }
+                }                
+            }
 
+            if (File.Exists(ConsoleInformation.GetSystemFilePath()))
+            {
                 foreach (var line in ReadLines(ConsoleInformation.GetSystemFilePath()))
                 {
                     if (line.Contains("Version ="))
@@ -137,6 +140,7 @@ namespace SmartNotifier.Service
                     }
                 }
             }
+
             return consoleInfo;
         }
 

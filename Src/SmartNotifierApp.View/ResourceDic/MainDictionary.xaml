@@ -91,7 +91,7 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="20"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock  Grid.Column="1" Text="@All Rights Reserved (CT/AMI hackathon) 2019-20" TextWrapping="Wrap"  Foreground="{DynamicResource HeaderFontColor}" FontSize="10" VerticalAlignment="Center" />
+                                    <TextBlock  Grid.Column="1" Text="@All Rights Reserved (CT/AMI hackathon) 2020-21" TextWrapping="Wrap"  Foreground="{DynamicResource HeaderFontColor}" FontSize="10" VerticalAlignment="Center" />
                                 </Grid>
                             </Border>
                         </Grid>
