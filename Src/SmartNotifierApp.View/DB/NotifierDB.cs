@@ -68,7 +68,7 @@ namespace SmartNotifier.View.DB
             MainWindowViewModelInstance = mainwindowviewmodelinstance;
             dbworker_Tick(null, null);
             DispatcherTimer dbworker = new DispatcherTimer();
-            dbworker.Interval = TimeSpan.FromSeconds(15);
+            dbworker.Interval = TimeSpan.FromSeconds(AppSettings.DBRefreshInterval);
             dbworker.Tick += dbworker_Tick;
             dbworker.Start();
         }
@@ -107,7 +107,12 @@ namespace SmartNotifier.View.DB
             ValidateLastRestart();
             //Check Hard disk space
             ValidateDriveDetails();
-            //Check Console Processes 
+            //Validate Console Processes 
+            ValidateConsoleProcessesAndServices();
+        }
+
+        private void ValidateConsoleProcessesAndServices()
+        {
             List<ConsoleProcesses> NewConsoleProcess = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleProcesses().ToList();
             bool isProcessUpdate = false;
             if (ConsoleProssesesList != null)
@@ -144,7 +149,6 @@ namespace SmartNotifier.View.DB
                 ProcessViewModel processesviewmodel = (ProcessViewModel)MainWindowViewModelInstance.MainMenu.Where(x => x.GetType().Name == nameof(ProcessViewModel)).FirstOrDefault();
                 processesviewmodel.ProcessesExecutionHandler(null, null);
             }
-
         }
 
         private void ValidateDriveDetails()

@@ -27,5 +27,12 @@ namespace SmartNotifier.View
         {
             get { return int.Parse((ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"] != null ? ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"].ToString() : "20")); }
         }
+
+        //DB Refresh Interval 
+        //In Seconds
+        public static int DBRefreshInterval
+        {
+            get { return int.Parse((ConfigurationManager.AppSettings["DBRefreshInterval"] != null ? ConfigurationManager.AppSettings["DBRefreshInterval"].ToString() : "15")); }
+        }
     }
 }
