@@ -20,7 +20,7 @@ namespace SmartNotifier.View
 
         public NotificationServices()
         {
-            _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Screen, NotificationLifetimeType.Basic);
+            _notifier = CreateNotifier(Corner.BottomRight, PositionProviderType.Screen, NotificationLifetimeType.TimeBased);
             Application.Current.MainWindow.Closing += MainWindowOnClosing;
         }
 
@@ -35,6 +35,10 @@ namespace SmartNotifier.View
                 cfg.LifetimeSupervisor = CreateLifetimeSupervisor(lifetime);
                 cfg.Dispatcher = Dispatcher.CurrentDispatcher;
                 cfg.DisplayOptions.TopMost = TopMost.GetValueOrDefault();
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(30),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(50)
+                );
             });
         }
 
@@ -62,19 +66,19 @@ namespace SmartNotifier.View
             switch (relation)
             {
                 case PositionProviderType.Window:
-                {
-                    return new WindowPositionProvider(Application.Current.MainWindow, corner, 5, 5);
-                }
+                    {
+                        return new WindowPositionProvider(Application.Current.MainWindow, corner, 5, 5);
+                    }
                 case PositionProviderType.Screen:
-                {
-                    return new PrimaryScreenPositionProvider(corner, 5, 5);
-                }
+                    {
+                        return new PrimaryScreenPositionProvider(corner, 5, 5);
+                    }
                 case PositionProviderType.Control:
-                {
-                    var mainWindow = Application.Current.MainWindow as MainWindow;
-                    var trackingElement = mainWindow;
-                    return new ControlPositionProvider(mainWindow, trackingElement, corner, 5, 5);
-                }
+                    {
+                        var mainWindow = Application.Current.MainWindow as MainWindow;
+                        var trackingElement = mainWindow;
+                        return new ControlPositionProvider(mainWindow, trackingElement, corner, 5, 5);
+                    }
             }
 
             throw new InvalidEnumArgumentException();
@@ -142,7 +146,7 @@ namespace SmartNotifier.View
                 }
             };
 
-            
+
             _notifier.ShowError(message, options);
         }
         #endregion
@@ -210,7 +214,7 @@ namespace SmartNotifier.View
 
         public void ClearAll()
         {
-           _notifier.ClearMessages(new ClearAll());
+            _notifier.ClearMessages(new ClearAll());
         }
 
         public void ClearByTag()
