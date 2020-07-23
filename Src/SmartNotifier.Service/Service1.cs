@@ -103,7 +103,54 @@ namespace SmartNotifier.Service
 
         public ConsoleInformation GetConsoleInformation()
         {
-            return new ConsoleInformation();
+            ConsoleInformation consoleInfo = new ConsoleInformation();
+            if (File.Exists(ConsoleInformation.GetMachineUniqueDescriptionFilePath()))
+            {
+                foreach (var line in ReadLines(ConsoleInformation.GetMachineUniqueDescriptionFilePath()))
+                {
+                    if (line.Contains("Scanner ="))
+                    {
+                        consoleInfo.Scanner = line.Replace("Scanner =", string.Empty).Trim();
+                    }
+
+                    if (line.Contains("Model ="))
+                    {
+                        consoleInfo.Model = line.Replace("Model =", string.Empty).Trim();
+                    }
+
+                    if (line.Contains("Couch-Type ="))
+                    {
+                        consoleInfo.CouchType = line.Replace("Couch-Type =", string.Empty).Replace("\"", string.Empty).Trim();
+                    }
+                }
+
+                foreach (var line in ReadLines(ConsoleInformation.GetSystemFilePath()))
+                {
+                    if (line.Contains("Version ="))
+                    {
+                        consoleInfo.ScannerVersion = line.Replace("Version =", string.Empty).Trim();
+                    }
+
+                    if (line.Contains("Modality ="))
+                    {
+                        consoleInfo.Modality = line.Replace("Modality =", string.Empty).Trim();
+                    }
+                }
+            }
+            return consoleInfo;
+        }
+
+        private IEnumerable<string> ReadLines(string path)
+        {
+            using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite, 0x1000, FileOptions.SequentialScan))
+            using (var sr = new StreamReader(fs, Encoding.UTF8))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    yield return line;
+                }
+            }
         }
     }
 }
