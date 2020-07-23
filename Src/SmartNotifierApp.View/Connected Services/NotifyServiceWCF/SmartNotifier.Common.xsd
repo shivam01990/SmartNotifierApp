@@ -40,4 +40,14 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ProcessStatus" nillable="true" type="tns:ProcessStatus" />
+  <xs:complexType name="ConsoleInformation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CouchType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Scanner" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ScannerVersion" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConsoleInformation" nillable="true" type="tns:ConsoleInformation" />
 </xs:schema>

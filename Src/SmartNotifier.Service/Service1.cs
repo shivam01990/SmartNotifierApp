@@ -100,5 +100,10 @@ namespace SmartNotifier.Service
 
             return consoleprocess;
         }
+
+        public ConsoleInformation GetConsoleInformation()
+        {
+            return new ConsoleInformation();
+        }
     }
 }

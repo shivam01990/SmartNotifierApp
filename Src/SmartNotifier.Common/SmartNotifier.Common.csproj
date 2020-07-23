@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonEnum.cs" />
+    <Compile Include="ConsoleInformation.cs" />
     <Compile Include="ConsoleProcesses.cs" />
     <Compile Include="DriveInformation.cs" />
     <Compile Include="NotificationEntity.cs" />

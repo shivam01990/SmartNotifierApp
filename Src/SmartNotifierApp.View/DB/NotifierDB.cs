@@ -46,6 +46,8 @@ namespace SmartNotifier.View.DB
 
         public SystemInforamtion SystemInfo { get; set; } = null;
 
+        public ConsoleInformation ConsoleInfo { get; set; } = null;
+
         public List<ConsoleProcesses> ConsoleProssesesList { get; set; } = null;
 
         public DateTime? LastRestartTime { get; set; } = null;
@@ -104,7 +106,7 @@ namespace SmartNotifier.View.DB
         private void dbworker_Tick(object sender, EventArgs e)
         {
             //Check Last Restart Time
-            ValidateLastRestart();
+            ValidateLastRestartAndCommonInfo();
             //Check Hard disk space
             ValidateDriveDetails();
             //Validate Console Processes 
@@ -181,7 +183,7 @@ namespace SmartNotifier.View.DB
             }
         }
 
-        private void ValidateLastRestart()
+        private void ValidateLastRestartAndCommonInfo()
         {
             if (NotifierDB.Instance.LastRestartTime == null)
             {
@@ -207,9 +209,11 @@ namespace SmartNotifier.View.DB
                 SystemInfo = SmartNotifierHelper.Instance.ServiceInstance.GetSystemInforamtion();
             }
 
+            if (NotifierDB.Instance.ConsoleInfo == null)
+            {
+                ConsoleInfo = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleInformation();
+            }
+
         }
-
-
-
     }
 }

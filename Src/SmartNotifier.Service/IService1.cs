@@ -13,9 +13,6 @@ namespace SmartNotifier.Service
     public interface IService1
     {
         [OperationContract]
-        void MonitorNotifications();
-
-        [OperationContract]
         DateTime? GetLastRestartTime();
 
         [OperationContract]
@@ -26,6 +23,9 @@ namespace SmartNotifier.Service
 
         [OperationContract]
         List<ConsoleProcesses> GetConsoleProcesses();
+
+        [OperationContract]
+        ConsoleInformation GetConsoleInformation();
     }
 
     public interface IServiceCallback

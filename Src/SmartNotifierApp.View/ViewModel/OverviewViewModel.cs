@@ -1,4 +1,5 @@
-﻿using SmartNotifier.View.DB;
+﻿using SmartNotifier.Common;
+using SmartNotifier.View.DB;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -130,6 +131,14 @@ namespace SmartNotifier.View.ViewModel
             }
         }
 
+        public ConsoleInformation ConsoleInfo
+        {
+            get
+            {
+                return NotifierDB.Instance.ConsoleInfo ?? new ConsoleInformation();
+            }
+        }
+
         private string restartInterval;
         public string RestartInterval
         {
@@ -149,7 +158,7 @@ namespace SmartNotifier.View.ViewModel
                 RaisedPropertyChanged(nameof(DDriveInfo));
                 RaisedPropertyChanged(nameof(CDriveProgress));
                 RaisedPropertyChanged(nameof(DDriveProgress));
-
+                RaisedPropertyChanged(nameof(ConsoleInfo));
             }
         }
 

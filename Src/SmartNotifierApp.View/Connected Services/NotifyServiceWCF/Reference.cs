@@ -15,12 +15,6 @@ namespace SmartNotifier.View.NotifyServiceWCF {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotifyServiceWCF.IService1")]
     public interface IService1 {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/MonitorNotifications", ReplyAction="http://tempuri.org/IService1/MonitorNotificationsResponse")]
-        void MonitorNotifications();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/MonitorNotifications", ReplyAction="http://tempuri.org/IService1/MonitorNotificationsResponse")]
-        System.Threading.Tasks.Task MonitorNotificationsAsync();
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetLastRestartTime", ReplyAction="http://tempuri.org/IService1/GetLastRestartTimeResponse")]
         System.Nullable<System.DateTime> GetLastRestartTime();
         
@@ -44,6 +38,12 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleProcesses", ReplyAction="http://tempuri.org/IService1/GetConsoleProcessesResponse")]
         System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleProcesses[]> GetConsoleProcessesAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleInformation", ReplyAction="http://tempuri.org/IService1/GetConsoleInformationResponse")]
+        SmartNotifier.Common.ConsoleInformation GetConsoleInformation();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleInformation", ReplyAction="http://tempuri.org/IService1/GetConsoleInformationResponse")]
+        System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleInformation> GetConsoleInformationAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -71,14 +71,6 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         public Service1Client(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
-        }
-        
-        public void MonitorNotifications() {
-            base.Channel.MonitorNotifications();
-        }
-        
-        public System.Threading.Tasks.Task MonitorNotificationsAsync() {
-            return base.Channel.MonitorNotificationsAsync();
         }
         
         public System.Nullable<System.DateTime> GetLastRestartTime() {
@@ -111,6 +103,14 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         public System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleProcesses[]> GetConsoleProcessesAsync() {
             return base.Channel.GetConsoleProcessesAsync();
+        }
+        
+        public SmartNotifier.Common.ConsoleInformation GetConsoleInformation() {
+            return base.Channel.GetConsoleInformation();
+        }
+        
+        public System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleInformation> GetConsoleInformationAsync() {
+            return base.Channel.GetConsoleInformationAsync();
         }
     }
 }

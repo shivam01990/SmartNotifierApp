@@ -40,12 +40,6 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/SmartNotifier.Common" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IService1_MonitorNotifications_InputMessage">
-    <wsdl:part name="parameters" element="tns:MonitorNotifications" />
-  </wsdl:message>
-  <wsdl:message name="IService1_MonitorNotifications_OutputMessage">
-    <wsdl:part name="parameters" element="tns:MonitorNotificationsResponse" />
-  </wsdl:message>
   <wsdl:message name="IService1_GetLastRestartTime_InputMessage">
     <wsdl:part name="parameters" element="tns:GetLastRestartTime" />
   </wsdl:message>
@@ -70,11 +64,13 @@
   <wsdl:message name="IService1_GetConsoleProcesses_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetConsoleProcessesResponse" />
   </wsdl:message>
+  <wsdl:message name="IService1_GetConsoleInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsoleInformation" />
+  </wsdl:message>
+  <wsdl:message name="IService1_GetConsoleInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetConsoleInformationResponse" />
+  </wsdl:message>
   <wsdl:portType name="IService1">
-    <wsdl:operation name="MonitorNotifications">
-      <wsdl:input wsaw:Action="http://tempuri.org/IService1/MonitorNotifications" message="tns:IService1_MonitorNotifications_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IService1/MonitorNotificationsResponse" message="tns:IService1_MonitorNotifications_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="GetLastRestartTime">
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetLastRestartTime" message="tns:IService1_GetLastRestartTime_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetLastRestartTimeResponse" message="tns:IService1_GetLastRestartTime_OutputMessage" />
@@ -91,20 +87,15 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetConsoleProcesses" message="tns:IService1_GetConsoleProcesses_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetConsoleProcessesResponse" message="tns:IService1_GetConsoleProcesses_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetConsoleInformation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IService1/GetConsoleInformation" message="tns:IService1_GetConsoleInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IService1/GetConsoleInformationResponse" message="tns:IService1_GetConsoleInformation_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NotifierSvcNetTcpEndPoint" type="tns:IService1">
     <wsp:PolicyReference URI="#NotifierSvcNetTcpEndPoint_policy">
     </wsp:PolicyReference>
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="MonitorNotifications">
-      <soap12:operation soapAction="http://tempuri.org/IService1/MonitorNotifications" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetLastRestartTime">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetLastRestartTime" style="document" />
       <wsdl:input>
@@ -134,6 +125,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetConsoleProcesses">
       <soap12:operation soapAction="http://tempuri.org/IService1/GetConsoleProcesses" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetConsoleInformation">
+      <soap12:operation soapAction="http://tempuri.org/IService1/GetConsoleInformation" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
