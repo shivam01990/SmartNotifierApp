@@ -142,7 +142,7 @@ namespace SmartNotifier.View.DB
                         NotificationMessageType = MessageType.Error,
                         NotificationTypeOf = NotificationType.ServiceAndProcesses,
                         NotifyOn = DateTime.Now
-                    }, true);
+                    }, false);
             }
 
             ConsoleProssesesList = NewConsoleProcess;
