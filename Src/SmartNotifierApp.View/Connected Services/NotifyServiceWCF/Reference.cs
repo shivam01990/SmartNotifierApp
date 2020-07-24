@@ -44,6 +44,12 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleInformation", ReplyAction="http://tempuri.org/IService1/GetConsoleInformationResponse")]
         System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleInformation> GetConsoleInformationAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleEventLogInformation", ReplyAction="http://tempuri.org/IService1/GetConsoleEventLogInformationResponse")]
+        SmartNotifier.Common.ConsoleEventLogs[] GetConsoleEventLogInformation(int loginterval);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetConsoleEventLogInformation", ReplyAction="http://tempuri.org/IService1/GetConsoleEventLogInformationResponse")]
+        System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleEventLogs[]> GetConsoleEventLogInformationAsync(int loginterval);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +117,14 @@ namespace SmartNotifier.View.NotifyServiceWCF {
         
         public System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleInformation> GetConsoleInformationAsync() {
             return base.Channel.GetConsoleInformationAsync();
+        }
+        
+        public SmartNotifier.Common.ConsoleEventLogs[] GetConsoleEventLogInformation(int loginterval) {
+            return base.Channel.GetConsoleEventLogInformation(loginterval);
+        }
+        
+        public System.Threading.Tasks.Task<SmartNotifier.Common.ConsoleEventLogs[]> GetConsoleEventLogInformationAsync(int loginterval) {
+            return base.Channel.GetConsoleEventLogInformationAsync(loginterval);
         }
     }
 }

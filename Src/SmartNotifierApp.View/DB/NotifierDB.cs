@@ -111,6 +111,8 @@ namespace SmartNotifier.View.DB
             ValidateDriveDetails();
             //Validate Console Processes 
             ValidateConsoleProcessesAndServices();
+            //Validate Application Logs
+            ValidateApplicationLogs();
         }
 
         private void ValidateConsoleProcessesAndServices()
@@ -214,6 +216,25 @@ namespace SmartNotifier.View.DB
                 ConsoleInfo = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleInformation();
             }
 
+        }
+
+        private void ValidateApplicationLogs()
+        {
+            List<ConsoleEventLogs> eventlogs = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleEventLogInformation(AppSettings.DBRefreshInterval).ToList();
+            if (eventlogs != null)
+            {
+                foreach (ConsoleEventLogs logmessage in eventlogs)
+                {
+                    AddMessageToNotificationQueue(
+                        new NotificationEntity()
+                        {
+                            NotificationMessage = logmessage.ErrorMessage,
+                            NotificationMessageType = MessageType.Error,
+                            NotificationTypeOf = NotificationType.ApplicationEventLog,
+                            NotifyOn = DateTime.Now
+                        }, false);
+                }
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Management;
@@ -122,7 +123,7 @@ namespace SmartNotifier.Service
                     {
                         consoleInfo.CouchType = line.Replace("Couch-Type =", string.Empty).Replace("\"", string.Empty).Trim();
                     }
-                }                
+                }
             }
 
             if (File.Exists(ConsoleInformation.GetSystemFilePath()))
@@ -143,6 +144,45 @@ namespace SmartNotifier.Service
 
             return consoleInfo;
         }
+
+        public List<ConsoleEventLogs> GetConsoleEventLogInformation(int loginterval)
+        {
+            List<ConsoleEventLogs> eventlist = new List<ConsoleEventLogs>();
+            EventLogReader logReader = null;
+
+            var startTime = System.DateTime.Now.AddSeconds(loginterval);
+            var endTime = System.DateTime.Now;
+
+            var query = string.Format(@"*[System/Level=1 or System/Level=2] and *[System[TimeCreated[@SystemTime >= '{0}']]] and *[System[TimeCreated[@SystemTime <= '{1}']]]",
+                startTime.ToUniversalTime().ToString("o"),
+                endTime.ToUniversalTime().ToString("o"));
+
+            EventLogQuery eventsQuery = new EventLogQuery("Application", PathType.LogName, query);
+            try
+            {
+                logReader = new EventLogReader(eventsQuery);
+                for (EventRecord eventdetail = logReader.ReadEvent();
+                    eventdetail != null;
+                    eventdetail = logReader.ReadEvent())
+                {
+                    string logMessage = eventdetail.FormatDescription();
+                    if (logMessage.Contains("C:\\Pms\\System\\"))
+                    {
+                        ConsoleEventLogs eventlog = new ConsoleEventLogs();
+                        eventlog.ErrorMessage = eventdetail.FormatDescription();
+                        eventlog.EventID = eventdetail.Id;
+                        eventlog.CreatedOn = eventdetail.TimeCreated;
+                        eventlog.EventType = eventdetail.Level == 1 ? EventType.CriticalError : EventType.Error;
+                        eventlist.Add(eventlog);
+                    }
+                }
+            }
+            catch (EventLogNotFoundException ex)
+            {
+            }
+            return eventlist;
+        }
+
 
         private IEnumerable<string> ReadLines(string path)
         {

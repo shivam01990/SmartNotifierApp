@@ -50,4 +50,26 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ConsoleInformation" nillable="true" type="tns:ConsoleInformation" />
+  <xs:complexType name="ArrayOfConsoleEventLogs">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConsoleEventLogs" nillable="true" type="tns:ConsoleEventLogs" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConsoleEventLogs" nillable="true" type="tns:ArrayOfConsoleEventLogs" />
+  <xs:complexType name="ConsoleEventLogs">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreatedOn" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EventID" type="xs:int" />
+      <xs:element minOccurs="0" name="EventType" type="tns:EventType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConsoleEventLogs" nillable="true" type="tns:ConsoleEventLogs" />
+  <xs:simpleType name="EventType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Error" />
+      <xs:enumeration value="CriticalError" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EventType" nillable="true" type="tns:EventType" />
 </xs:schema>

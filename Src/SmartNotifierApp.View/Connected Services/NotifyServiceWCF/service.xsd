@@ -61,4 +61,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetConsoleEventLogInformation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="loginterval" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetConsoleEventLogInformationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/SmartNotifier.Common" minOccurs="0" name="GetConsoleEventLogInformationResult" nillable="true" type="q5:ArrayOfConsoleEventLogs" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

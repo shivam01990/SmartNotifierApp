@@ -26,6 +26,9 @@ namespace SmartNotifier.Service
 
         [OperationContract]
         ConsoleInformation GetConsoleInformation();
+
+        [OperationContract]
+        List<ConsoleEventLogs> GetConsoleEventLogInformation(int loginterval);
     }
 
     public interface IServiceCallback

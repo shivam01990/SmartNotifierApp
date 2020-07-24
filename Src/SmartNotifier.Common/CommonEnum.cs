@@ -10,14 +10,15 @@ namespace SmartNotifier.Common
     {
         RestartNotification,
         DiskSpaceNotification,
-        ServiceAndProcesses
+        ServiceAndProcesses,
+        ApplicationEventLog
     }
 
     public enum MessageType
     {
         Warninig,
         Information,
-        Error        
+        Error
     }
 
     public enum ProcessStatus
@@ -26,5 +27,11 @@ namespace SmartNotifier.Common
         Stopped,
         NotResponding,
         NA
+    }
+
+    public enum EventType
+    {
+        Error,
+        CriticalError
     }
 }
