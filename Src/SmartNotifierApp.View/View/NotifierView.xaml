@@ -19,10 +19,10 @@
                  Grid.Row="1" SelectedIndex="0"
                  ItemsSource="{Binding NotificationList}"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <ListBox.ItemTemplate>               
+            <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020" Width="580"  HorizontalAlignment="Stretch" BorderThickness="0,0,0,0">
-                        <TextBlock Foreground="White" Text="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2"/>
+                        <TextBlock Foreground="White" Text="{Binding NotificationMessage}" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"  HorizontalAlignment="Stretch" Margin="2"/>
                     </Border>
                 </DataTemplate>
             </ListBox.ItemTemplate>

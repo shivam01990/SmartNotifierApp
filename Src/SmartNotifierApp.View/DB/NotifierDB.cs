@@ -164,11 +164,11 @@ namespace SmartNotifier.View.DB
                 string drivespaceNotification = string.Empty;
                 if (DriveDetails.CTotalFreeSpace < AppSettings.ThresholdSpaceForNotificationAlert && DriveDetails.CTotalSize > DriveDetails.CTotalFreeSpace)
                 {
-                    drivespaceNotification = Environment.NewLine + " C: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
+                    drivespaceNotification += Environment.NewLine + " C: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
                 }
                 if (DriveDetails.DTotalFreeSpace < AppSettings.ThresholdSpaceForNotificationAlert && DriveDetails.DTotalSize > DriveDetails.DTotalFreeSpace)
                 {
-                    drivespaceNotification = Environment.NewLine + " D: " + DriveDetails.DTotalFreeSpace + " GB" + Environment.NewLine;
+                    drivespaceNotification += Environment.NewLine + " D: " + DriveDetails.DTotalFreeSpace + " GB" + Environment.NewLine;
                 }
                 if (drivespaceNotification.Length > 0)
                 {
@@ -231,7 +231,7 @@ namespace SmartNotifier.View.DB
                         int startIndex = logmessage.LastIndexOf('\\') + 1;
                         int endIndex = logmessage.IndexOf('.', startIndex);
                         string MessageDisplay = logmessage.Substring(startIndex, endIndex - startIndex);
-                        string msg = "The " + MessageDisplay + " looks like is unstable.Please try to restart it";
+                        string msg = "The " + MessageDisplay + " looks like is unstable.Please try to restart it.";
                         AddMessageToNotificationQueue(
                             new NotificationEntity()
                             {

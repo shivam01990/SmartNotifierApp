@@ -27,7 +27,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock  Width="200" ToolTip="{Binding ProcessName}" Text="{Binding ProcessName}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="3"/>
+                        <TextBlock  Width="300" ToolTip="{Binding ProcessName}" Text="{Binding ProcessName}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="3"/>
                         <Ellipse Width="15" Height="15" ToolTip="{Binding Status}" Fill="{Binding Status,Converter={StaticResource MessageTypeStatusConvertor}}" StrokeThickness="1" Stroke="White"/>
                     </StackPanel>
                 </DataTemplate>
