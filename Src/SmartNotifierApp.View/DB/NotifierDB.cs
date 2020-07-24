@@ -223,16 +223,25 @@ namespace SmartNotifier.View.DB
             List<ConsoleEventLogs> eventlogs = SmartNotifierHelper.Instance.ServiceInstance.GetConsoleEventLogInformation(AppSettings.DBRefreshInterval).ToList();
             if (eventlogs != null)
             {
-                foreach (ConsoleEventLogs logmessage in eventlogs)
+                foreach (ConsoleEventLogs eventlog in eventlogs)
                 {
-                    AddMessageToNotificationQueue(
-                        new NotificationEntity()
-                        {
-                            NotificationMessage = logmessage.ErrorMessage,
-                            NotificationMessageType = MessageType.Error,
-                            NotificationTypeOf = NotificationType.ApplicationEventLog,
-                            NotifyOn = DateTime.Now
-                        }, false);
+                    try
+                    {
+                        string logmessage = eventlog.ErrorMessage;
+                        int startIndex = logmessage.LastIndexOf('\\') + 1;
+                        int endIndex = logmessage.IndexOf('.', startIndex);
+                        string MessageDisplay = logmessage.Substring(startIndex, endIndex - startIndex);
+                        string msg = "The " + MessageDisplay + " looks like is unstable.Please try to restart it";
+                        AddMessageToNotificationQueue(
+                            new NotificationEntity()
+                            {
+                                NotificationMessage = msg,
+                                NotificationMessageType = MessageType.Error,
+                                NotificationTypeOf = NotificationType.ApplicationEventLog,
+                                NotifyOn = DateTime.Now
+                            }, false);
+                    }
+                    catch { }
                 }
             }
         }
