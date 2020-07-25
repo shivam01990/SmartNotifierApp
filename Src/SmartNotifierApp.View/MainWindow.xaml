@@ -25,6 +25,9 @@
             <DataTemplate DataType="{x:Type ViewModel:NotifierViewModel}">
                 <View:NotifierView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type ViewModel:SettingsViewModel}">
+                <View:SettingsView/>
+            </DataTemplate>
 
         </Grid.Resources>
         <Grid.RowDefinitions>

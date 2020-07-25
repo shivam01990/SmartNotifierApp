@@ -10,29 +10,17 @@ namespace SmartNotifier.View
     public class AppSettings
     {
         //Time is in hours
-        public static int ValidateRestartTime
-        {
-            get { return int.Parse((ConfigurationManager.AppSettings["ValidateRestartTime"] != null ? ConfigurationManager.AppSettings["ValidateRestartTime"].ToString() : "24")); }
-        }
+        public static int ValidateRestartTime { get; set; } = int.Parse((ConfigurationManager.AppSettings["ValidateRestartTime"] != null ? ConfigurationManager.AppSettings["ValidateRestartTime"].ToString() : "24"));
 
         //Time is in hours
-        public static int ValidateRepeateNotificationTime
-        {
-            get { return int.Parse((ConfigurationManager.AppSettings["ValidateRepeateNotificationTime"] != null ? ConfigurationManager.AppSettings["ValidateRepeateNotificationTime"].ToString() : "24")); }
-        }
+        public static int ValidateRepeateNotificationTime { get; set; } = int.Parse((ConfigurationManager.AppSettings["ValidateRepeateNotificationTime"] != null ? ConfigurationManager.AppSettings["ValidateRepeateNotificationTime"].ToString() : "24"));
 
         //Threshold Space For Notification Alert 
         //Giga Bytes
-        public static int ThresholdSpaceForNotificationAlert
-        {
-            get { return int.Parse((ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"] != null ? ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"].ToString() : "20")); }
-        }
+        public static int ThresholdSpaceForNotificationAlert { get; set; } = int.Parse((ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"] != null ? ConfigurationManager.AppSettings["ThresholdSpaceForNotificationAlert"].ToString() : "20"));
 
         //DB Refresh Interval 
         //In Seconds
-        public static int DBRefreshInterval
-        {
-            get { return int.Parse((ConfigurationManager.AppSettings["DBRefreshInterval"] != null ? ConfigurationManager.AppSettings["DBRefreshInterval"].ToString() : "15")); }
-        }
+        public static int DBRefreshInterval { get; set; } = int.Parse((ConfigurationManager.AppSettings["DBRefreshInterval"] != null ? ConfigurationManager.AppSettings["DBRefreshInterval"].ToString() : "15"));
     }
 }

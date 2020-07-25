@@ -40,6 +40,7 @@ namespace SmartNotifier.View.ViewModel
             temp_mainMenu.Add(new OverviewViewModel());
             temp_mainMenu.Add(new ProcessViewModel());
             temp_mainMenu.Add(new NotifierViewModel());
+            temp_mainMenu.Add(new SettingsViewModel());
             #endregion
         }
 
