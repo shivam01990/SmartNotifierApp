@@ -5,7 +5,7 @@
         xmlns:ViewModel="clr-namespace:SmartNotifier.View.ViewModel"
         xmlns:Convertor="clr-namespace:SmartNotifier.View.Converters"
         xmlns:View="clr-namespace:SmartNotifier.View.View"
-        Title="Smart Notifier App" Height="600" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        Title="Console Smart Notifier" Height="600" Width="800" ShowInTaskbar="False" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
         FontFamily="Arial" Background="Transparent"  MouseLeftButtonDown="Drag_Window" Style="{DynamicResource MainWindowStyle}" x:Name="window" TabIndex="0" Foreground="#FFFFFFFF">
     <Window.CommandBindings>
         <CommandBinding Command="Close" Executed="CloseCommand_Executed"/>
