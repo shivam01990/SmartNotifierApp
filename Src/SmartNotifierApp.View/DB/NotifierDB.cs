@@ -172,7 +172,7 @@ namespace SmartNotifier.View.DB
                 }
                 if (drivespaceNotification.Length > 0)
                 {
-                    drivespaceNotification = "Drive free space is less." + drivespaceNotification + "Please cleanup the space";
+                    drivespaceNotification = "Drive free space is less." + drivespaceNotification + "Please cleanup the space.";
                     AddMessageToNotificationQueue(
                         new NotificationEntity()
                         {
@@ -225,24 +225,16 @@ namespace SmartNotifier.View.DB
             {
                 foreach (ConsoleEventLogs eventlog in eventlogs)
                 {
-                    try
-                    {
-                        string logmessage = eventlog.ErrorMessage;
-                        int startIndex = logmessage.LastIndexOf('\\') + 1;
-                        int endIndex = logmessage.IndexOf('.', startIndex);
-                        string MessageDisplay = logmessage.Substring(startIndex, endIndex - startIndex);
-                        string msg = "The " + MessageDisplay + " looks like is unstable.Please try to restart it.";
-                        AddMessageToNotificationQueue(
-                            new NotificationEntity()
-                            {
-                                NotificationMessage = msg,
-                                NotificationMessageType = MessageType.Error,
-                                NotificationTypeOf = NotificationType.ApplicationEventLog,
-                                NotifyOn = DateTime.Now
-                            }, false);
-                    }
-                    catch { }
+                    AddMessageToNotificationQueue(
+                        new NotificationEntity()
+                        {
+                            NotificationMessage = eventlog.ErrorMessage,
+                            NotificationMessageType = MessageType.Error,
+                            NotificationTypeOf = NotificationType.ApplicationEventLog,
+                            NotifyOn = DateTime.Now
+                        }, false);
                 }
+
             }
         }
     }

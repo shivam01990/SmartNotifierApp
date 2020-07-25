@@ -15,15 +15,33 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <TextBlock HorizontalAlignment="Left"  FontSize="18" Text="Received Notifications" FontWeight="Bold" VerticalAlignment="Top" Grid.Column="0" Margin="0,0,0,0" />
-        <ListBox x:Name="ListBoxNotifications" SelectionMode="Multiple" Margin="-20,0,0,0" Background="Transparent" BorderBrush="Transparent"  ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"          
+        <ListBox x:Name="ListBoxNotifications" Margin="-20,0,0,0" Background="Transparent" BorderBrush="Transparent"  ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto"  ScrollViewer.HorizontalScrollBarVisibility="Disabled"          
                  Grid.Row="1" SelectedIndex="0"
                  ItemsSource="{Binding NotificationList}"
                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Grid.Column="1" Margin="0" BorderBrush="#FF202020" Width="580"  HorizontalAlignment="Stretch" BorderThickness="0,0,0,0">
-                        <TextBlock Foreground="White" Text="{Binding NotificationMessage}" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"  HorizontalAlignment="Stretch" Margin="2"/>
-                    </Border>
+                    <WrapPanel>
+                        <TextBlock x:Name="txtTrimMessage" Foreground="White" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2">
+                            <Run Text="{Binding NotificationTrimMessage, Mode=OneWay}"/>
+                            <Hyperlink>
+                             <Run Text="{Binding NotifyOn}"/>
+                           </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="txtMessage" Visibility="Collapsed" Foreground="White" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2">
+                            <Run Text="{Binding NotificationMessage, Mode=OneWay}"/>
+                            <Hyperlink>
+                             <Run Text="{Binding NotifyOn}"/>
+                           </Hyperlink>
+                        </TextBlock>
+                    </WrapPanel>
+                    <DataTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
+                        Value="True">
+                            <Setter TargetName="txtMessage" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="txtTrimMessage" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 

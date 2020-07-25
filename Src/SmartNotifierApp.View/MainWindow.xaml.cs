@@ -69,16 +69,16 @@ namespace SmartNotifier.View
                     switch (message.NotificationMessageType)
                     {
                         case MessageType.Error:
-                            SmartNotifierHelper.Instance.ShowError(message.NotificationMessage);
+                            SmartNotifierHelper.Instance.ShowError(message.NotificationTrimMessage);
                             break;
                         case MessageType.Warninig:
-                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationMessage);
+                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationTrimMessage);
                             break;
                         case MessageType.Information:
-                            SmartNotifierHelper.Instance.ShowInformation(message.NotificationMessage);
+                            SmartNotifierHelper.Instance.ShowInformation(message.NotificationTrimMessage);
                             break;
                         default:
-                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationMessage);
+                            SmartNotifierHelper.Instance.ShowWarning(message.NotificationTrimMessage);
                             break;
                     }
 
@@ -170,8 +170,6 @@ namespace SmartNotifier.View
               SmartNotifierHelper.Instance.ShowInformation(Message);
           })
        ));
-
-
 
         }
     }
