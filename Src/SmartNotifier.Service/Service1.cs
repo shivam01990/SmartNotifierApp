@@ -150,7 +150,7 @@ namespace SmartNotifier.Service
             List<ConsoleEventLogs> eventlist = new List<ConsoleEventLogs>();
             EventLogReader logReader = null;
 
-            var startTime = System.DateTime.Now.AddSeconds(loginterval);
+            var startTime = System.DateTime.Now.AddSeconds(-loginterval);
             var endTime = System.DateTime.Now;
 
             var query = string.Format(@"*[System/Level=1 or System/Level=2] and *[System[TimeCreated[@SystemTime >= '{0}']]] and *[System[TimeCreated[@SystemTime <= '{1}']]]",

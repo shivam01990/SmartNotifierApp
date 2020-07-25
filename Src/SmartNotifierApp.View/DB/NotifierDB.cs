@@ -164,15 +164,15 @@ namespace SmartNotifier.View.DB
                 string drivespaceNotification = string.Empty;
                 if (DriveDetails.CTotalFreeSpace < AppSettings.ThresholdSpaceForNotificationAlert && DriveDetails.CTotalSize > DriveDetails.CTotalFreeSpace)
                 {
-                    drivespaceNotification += Environment.NewLine + " C: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
+                    drivespaceNotification += " C: " + DriveDetails.CTotalFreeSpace + " GB" + Environment.NewLine;
                 }
                 if (DriveDetails.DTotalFreeSpace < AppSettings.ThresholdSpaceForNotificationAlert && DriveDetails.DTotalSize > DriveDetails.DTotalFreeSpace)
                 {
-                    drivespaceNotification += Environment.NewLine + " D: " + DriveDetails.DTotalFreeSpace + " GB" + Environment.NewLine;
+                    drivespaceNotification += " D: " + DriveDetails.DTotalFreeSpace + " GB" + Environment.NewLine;
                 }
                 if (drivespaceNotification.Length > 0)
                 {
-                    drivespaceNotification = "Drive free space is less." + drivespaceNotification + "Please cleanup the space.";
+                    drivespaceNotification = "Drive free space is less." + Environment.NewLine + drivespaceNotification + "Please cleanup the space.";
                     AddMessageToNotificationQueue(
                         new NotificationEntity()
                         {
