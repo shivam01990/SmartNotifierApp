@@ -106,6 +106,13 @@ namespace SmartNotifier.View.ViewModel
             AppSettings.ValidateRepeateNotificationTime = RepeateNotificationTime;
             AppSettings.DBRefreshInterval = DBRefreshInterval;
             AppSettings.ThresholdSpaceForNotificationAlert = ThresholdSpaceForNotificationAlert;
+            NotifierDB.Instance.NewNotificationQueue.Enqueue(new Common.NotificationEntity
+            {
+                NotificationMessage = "Application settings are saved.",
+                NotificationMessageType = Common.MessageType.Information,
+                NotificationTypeOf = Common.NotificationType.GeneralNotification,
+                NotifyOn = DateTime.Now
+            });
         }
 
     }

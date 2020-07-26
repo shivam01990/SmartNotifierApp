@@ -11,7 +11,8 @@ namespace SmartNotifier.Common
         RestartNotification,
         DiskSpaceNotification,
         ServiceAndProcesses,
-        ApplicationEventLog
+        ApplicationEventLog,
+        GeneralNotification
     }
 
     public enum MessageType
