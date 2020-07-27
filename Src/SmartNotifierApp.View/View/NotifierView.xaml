@@ -23,16 +23,16 @@
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock x:Name="txtTrimMessage" Foreground="White" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2">
-                            <Run Text="{Binding NotificationTrimMessage, Mode=OneWay}"/>
                             <Hyperlink>
-                             <Run Text="{Binding NotifyOn}"/>
-                           </Hyperlink>
+                                <Run Text="{Binding NotifyOn}" FontWeight="Bold" Foreground= "PaleGoldenrod"/>
+                            </Hyperlink>
+                            <Run Text="{Binding NotificationTrimMessage, Mode=OneWay}"/>
                         </TextBlock>
                         <TextBlock x:Name="txtMessage" Visibility="Collapsed" Foreground="White" ToolTip="{Binding NotificationMessage}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="2">
-                            <Run Text="{Binding NotificationMessage, Mode=OneWay}"/>
                             <Hyperlink>
-                             <Run Text="{Binding NotifyOn}"/>
-                           </Hyperlink>
+                                <Run Text="{Binding NotifyOn}" FontWeight="UltraBold" Foreground= "PaleGoldenrod"/>
+                            </Hyperlink>
+                            <Run Text="{Binding NotificationMessage, Mode=OneWay}"/>
                         </TextBlock>
                     </WrapPanel>
                     <DataTemplate.Triggers>
@@ -45,7 +45,11 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
+
+
         </ListBox>
+
+
 
     </Grid>
 </UserControl>

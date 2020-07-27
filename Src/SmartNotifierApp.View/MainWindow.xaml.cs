@@ -82,6 +82,8 @@ namespace SmartNotifier.View
                             break;
                     }
 
+                    SmartNotifierHelper.Instance.AddtoLogFile("Notification:" + message.NotificationMessage);
+
                 });
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -95,9 +96,31 @@ namespace SmartNotifier.View
             _serviceInstance = client;
         }
 
-        public DateTime? LastRestartTime { get; set; } = null;
+        public void AddtoLogFile(string Message)
+        {
+            try
+            {
+                string LogPath = AppDomain.CurrentDomain.BaseDirectory + "Logs";
+                if (!Directory.Exists(LogPath))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
 
-        public TimeSpan LastRestartedTimeSpan { get; set; }
+                string filename = "\\Log" + DateTime.Now.ToString("dd_MM_yyyy") + ".txt";
+                string filepath = LogPath + filename;
+                if (!File.Exists(filepath))
+                {
+                    StreamWriter writer = File.CreateText(filepath);
+                    writer.Close();
+                }
+                using (StreamWriter writer = new StreamWriter(filepath, true))
+                {
+                    writer.WriteLine(DateTime.Now + ":" + Message);
+                }
+            }
+            catch
+            { }
+        }
 
     }
 }
