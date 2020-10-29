@@ -25,7 +25,7 @@ namespace SmartNotifier.View.ViewModel
 
         public string Name
         {
-            get { return "Notification"; }
+            get { return "Notification" + "(" + NotificationList.Count + ")"; }
         }
 
         public string Icon
@@ -43,6 +43,7 @@ namespace SmartNotifier.View.ViewModel
             {
                 _notificationList = value;
                 RaisedPropertyChanged(nameof(NotificationList));
+                RaisedPropertyChanged(nameof(Name));
             }
         }
     }

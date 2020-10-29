@@ -83,7 +83,8 @@ namespace SmartNotifier.View
                     }
 
                     SmartNotifierHelper.Instance.AddtoLogFile("Notification:" + message.NotificationMessage);
-
+                    nIcon.Text = "Smart Notifier App(" + NotifierDB.Instance.OldNotificationQueue.Count + ")";
+                    nIcon.Icon = GetIcon(NotifierDB.Instance.OldNotificationQueue.Count.ToString());
                 });
             }
         }
@@ -93,12 +94,40 @@ namespace SmartNotifier.View
             m_menu = new ContextMenu();
             m_menu.MenuItems.Add(0, new MenuItem("Exit", new System.EventHandler(Exit_Click)));
             nIcon.Visible = true;
-            nIcon.Icon = new Icon(@"CT.ico");
+            nIcon.Icon = GetIcon(NotifierDB.Instance.OldNotificationQueue.Count.ToString());
             nIcon.Text = "Smart Notifier App";
             nIcon.DoubleClick += NIcon_Click;
             nIcon.ContextMenu = m_menu;
             WindowState = System.Windows.WindowState.Minimized;
             Hide();
+        }
+
+        public static Icon GetIcon(string text)
+        {
+            Icon icon = new Icon(@"CT.ico");
+            //Create bitmap, kind of canvas
+            Bitmap bitmap = new Bitmap(icon.Width + 20, icon.Height);
+
+            System.Drawing.Font drawFont = new System.Drawing.Font("Calibri", 100, System.Drawing.FontStyle.Regular);
+            System.Drawing.SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
+
+            System.Drawing.Graphics graphics = System.Drawing.Graphics.FromImage(bitmap);
+
+            graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+            graphics.DrawIcon(icon, 0, 0);
+            graphics.DrawString(text, drawFont, drawBrush, -20, -20);
+
+            //To Save icon to disk
+            //bitmap.Save("icon.ico", System.Drawing.Imaging.ImageFormat.Icon);
+
+            Icon createdIcon = System.Drawing.Icon.FromHandle(bitmap.GetHicon());
+
+            drawFont.Dispose();
+            drawBrush.Dispose();
+            graphics.Dispose();
+            bitmap.Dispose();
+
+            return createdIcon;
         }
 
         private void Exit_Click(object sender, EventArgs e)
